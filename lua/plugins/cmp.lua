@@ -26,10 +26,52 @@ return {
         },
       })
       cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
+        mapping = cmp.mapping.preset.insert {
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            -- elseif vim.fn["vsnip#available"](1) == 1 then
+            --   feedkey("<Plug>(vsnip-expand-or-jump)", "")
+            -- elseif has_words_before() then
+            --   cmp.complete()
+            else
+              fallback()
+            end
+          end, { "i", "s", "c" }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            -- elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+            --   feedkey("<Plug>(vsnip-jump-prev)", "")
+            else
+              fallback()
+            end
+          end, { "i", "s", "c" }),
+          ["<c-n>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            -- elseif vim.fn["vsnip#available"](1) == 1 then
+            --   feedkey("<Plug>(vsnip-expand-or-jump)", "")
+            -- elseif has_words_before() then
+            --   cmp.complete()
+            else
+              fallback()
+            end
+          end, { "i", "s", "c" }),
+          ["<c-p>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            -- elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+            --   feedkey("<Plug>(vsnip-jump-prev)", "")
+            else
+              fallback()
+            end
+          end, { "i", "s", "c" }),
+        },
         sources = {
           { name = "cmdline_history" },
-          { name = "cmdline" },
+          { name = "path" },
+          { name = "cmdline", option = { ignore_cmds = { "!" } } },
         },
       })
       -- table.insert(opts.sources, { name = "spell" })

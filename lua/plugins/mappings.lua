@@ -63,7 +63,6 @@ maps.n["<Leader>fn"] = { "<cmd>enew<cr>", desc = "New file" }
 maps.n["<Leader>fe"] = { "<cmd>lua _VIFM_TOGGLE()<cr>", desc = "Explorer from current dir" }
 maps.n["<Leader>fE"] = { "<cmd>lua _VIFM_TOGGLE(vim.fn.getcwd())<cr>", desc = "Explorer from current dir" }
 maps.n["<Leader>fd"] = { "<cmd>lua require('telescope').extensions.dir.live_grep()<CR>", desc = "Find dir" }
-maps.n["<Leader>fp"] = { "<cmd>lua require('telescope').extensions.project.project{}<CR>", desc = "Projects" }
 maps.n["<Leader>f?"] = { "<cmd>lua require('telescope.builtin').search_history()<CR>", desc = "History" }
 maps.n["<Leader>fy"] = { "<cmd>let @*=expand('%')<cr>", desc = "Yank file path" }
 maps.n["<Leader>fY"] = { "<cmd>let @*=expand('%:p')<cr>", desc = "Yank full file path" }
@@ -71,6 +70,11 @@ maps.n["<Leader>fx"] = { "<cmd>OpenFile<cr>", desc = "Open file in folder" }
 maps.n["<Leader>fX"] = { "<cmd>OpenFolderInFinder<cr>", desc = "Open folder" }
 maps.v["<leader>fw"] = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args({default_text = require('core.utils').get_visual_selection()})<CR>", desc = "Live grep", }
 maps.n["<Leader>fC"] = false
+maps.n["<Leader>fp"] = { "<cmd>Telescope workspaces<CR>", desc = "List workspaces" }
+maps.n["<Leader>fP"] = { desc = "Workspaces" }
+maps.n["<Leader>fPa"] = { "<cmd>WorkspacesAdd<CR>", desc = "Add workspace" }
+maps.n["<Leader>fPd"] = { "<cmd>WorkspacesRemove<CR>", desc = "Remove workspace" }
+maps.n["<Leader>fPD"] = { ":WorkspacesRemove <right>", desc = "Remove workspace by name" }
 
 -- +Search
 maps.n["<Leader>s"] = { desc = "Search" }
@@ -78,13 +82,12 @@ maps.n["<leader>sc"] = { "<cmd>lua require('telescope.builtin').commands()<CR>",
 maps.n["<Leader>s;"] = { "<cmd>lua require('telescope.builtin').command_history()<CR>", desc = "Command History" }
 maps.n["<Leader>st"] = { "<cmd>TodoTelescope<cr>", desc = "Todo list" }
 maps.n["<leader>sb"] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", desc = "Buffers" }
+maps.n["<Leader>sn"] = { function() require("telescope").extensions.notify.notify() end, desc = "Find notifications" }
+maps.n["<leader>s<cr>"] = { "<cmd>lua require('telescope.builtin').resume()<CR>", desc = "Resume" }
 -- maps.n["<leader>sh"] = { "<cmd>lua require('telescope.builtin').help_tags()<CR>", desc = "Help" }
 -- maps.n["<leader>sk"] = { "<cmd>lua require('telescope.builtin').keymaps()<CR>", desc = "Keymaps" }
 -- maps.n["<leader>sO"] = { "<cmd>lua require('telescope.builtin').vim_options()<CR>", desc = "Options" }
 -- maps.n["<leader>s;"] = { "<cmd>lua require('telescope.builtin').command_history()<CR>", desc = "History" }
--- maps.n["<leader>s<cr>"] = { "<cmd>lua require('telescope.builtin').resume()<CR>", desc = "Resume" }
--- maps.n["<leader>sw"] = { "<cmd>BrowserSearch<cr>", desc = "Web" }
--- maps.n["<leader>st"] = { "<cmd>TodoTelescope<cr>", desc = "Todo list" }
 
 -- +Buffers
 maps.n["<Leader>bo"] = { "<Leader>bc", desc = "Close all buffers except current", remap = true }

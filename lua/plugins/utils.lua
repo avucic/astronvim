@@ -39,6 +39,7 @@ return {
         opts = function(_, opts)
           local maps = opts.mappings
           maps.n["<Leader>sw"] = { "<cmd>BrowserSearch<cr>", desc = "Find work on Web" }
+          maps.v["<Leader>sw"] = { "<cmd>BrowserSearch<cr>", desc = "Find work on Web" }
         end,
       },
     },

@@ -158,6 +158,10 @@ return function(_, _)
     --   },
     -- },
     extensions = {
+      workspaces = {
+        -- keep insert mode after selection in the picker, default is false
+        keep_insert = true,
+      },
       fzf = {
         fuzzy = true, -- false will only do exact matching
         override_generic_sorter = true, -- override the generic sorter
