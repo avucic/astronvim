@@ -32,6 +32,9 @@ return {
     end,
     cmd = { "Easypick" },
   },
+  {
+    "nvim-telescope/telescope-project.nvim",
+  },
   -- {
   --   "gbrlsnchs/telescope-lsp-handlers.nvim",
   -- },
