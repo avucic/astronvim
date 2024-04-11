@@ -1,33 +1,125 @@
+local Job = require "plenary.job"
+local dap = require "dap"
+
 return {
   {
-    "mrcjkb/rustaceanvim",
-    --   init = function()
-    --     vim.g.rustaceanvim = {
-    --       -- Plugin configuration
-    --       tools = {},
-    --       -- LSP configuration
-    --       server = {
-    --         on_attach = function(client, bufnr)
-    --           -- you can also put keymaps in here
-    --           if client.supports_method "textDocument/formatting" then
-    --             vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-    --             vim.api.nvim_create_autocmd("BufWritePre", {
-    --               group = augroup,
-    --               buffer = bufnr,
-    --               callback = function() vim.lsp.buf.format() end,
-    --             })
-    --           end
-    --         end,
-    --         settings = function(project_root)
-    --           local ra = require "rustaceanvim.config.server"
-    --           return ra.load_rust_analyzer_settings(project_root, {
-    --             settings_file_pattern = ".rust-analyzer.json",
-    --           })
-    --         end,
-    --       },
-    --       -- DAP configuration
-    --       dap = {},
-    --     }
-    --   end,
+    "mfussenegger/nvim-dap",
+    dependencies = { "suketa/nvim-dap-ruby", config = false, enabled = false },
+    config = function()
+      require("dap.ext.vscode").load_launchjs()
+
+      dap.adapters.ruby = function(callback, config)
+        local port = config.debugPort or os.getenv "RUBY_DEBUG_PORT" or "12345"
+        local host = config.debugHost or "127.0.0.1"
+        local current_line = vim.fn.line "."
+        local script = config.script and config.script:gsub("${currentLine}", current_line)
+        local executable = config.executable
+
+        if config.request == "launch" then
+          local command = executable and executable.command or "rdbg"
+          local args = executable and executable.args or {}
+
+          for i, v in pairs(executable.args) do
+            v = v:gsub("${currentLine}", current_line)
+            executable.args[i] = v
+          end
+
+          Job:new({
+            command = command,
+            detached = true,
+            args = args,
+            on_stdout = function(j, return_val) print("DEBUGGER stdout", return_val) end,
+
+            on_stderr = function(j, return_val) print("DEBUGGER stderr", return_val) end,
+          }):sync() -- or start()
+
+          print("RUBY DEBUGGER", vim.inspect(opts), vim.inspect(executable))
+
+          vim.defer_fn(function() callback { type = "server", host = host, port = port } end, 100)
+        else
+          print("RUBY DEBUGGER", port, host)
+          callback { type = "server", host = host, port = port }
+        end
+      end
+
+      -- dap.configurations.ruby = {
+      --   {
+      --     type = "ruby",
+      --     name = "run rails",
+      --     bundle = "bundle",
+      --     request = "attach",
+      --     command = "rails",
+      --     script = "s",
+      --     port = 38698,
+      --     server = "127.0.0.1",
+      --     options = {
+      --       source_filetype = "ruby",
+      --     },
+      --     localfs = true,
+      --     waiting = 1000,
+      --   },
+      --   {
+      --     type = "ruby",
+      --     name = "debug current file",
+      --     bundle = "",
+      --     request = "attach",
+      --     command = "ruby",
+      --     script = "${file}",
+      --     port = 38698,
+      --     server = "127.0.0.1",
+      --     options = {
+      --       source_filetype = "ruby",
+      --     },
+      --     localfs = true,
+      --     waiting = 1000,
+      --   },
+      --   {
+      --     type = "ruby",
+      --     name = "run rspec current_file",
+      --     bundle = "bundle",
+      --     request = "attach",
+      --     command = "rspec",
+      --     script = "${file}",
+      --     port = 38698,
+      --     server = "127.0.0.1",
+      --     options = {
+      --       source_filetype = "ruby",
+      --     },
+      --     localfs = true,
+      --     waiting = 1000,
+      --   },
+      --   {
+      --     type = "ruby",
+      --     name = "==>>>  run rspec current_file:current_line",
+      --     bundle = "bundle",
+      --     request = "attach",
+      --     command = "rspec",
+      --     script = "${file}",
+      --     port = 38698,
+      --     server = "127.0.0.1",
+      --     options = {
+      --       source_filetype = "ruby",
+      --     },
+      --     localfs = true,
+      --     waiting = 1000,
+      --     current_line = true,
+      --   },
+      --   {
+      --     type = "ruby",
+      --     name = "run rspec",
+      --     bundle = "bundle",
+      --     request = "attach",
+      --     command = "rspec",
+      --     script = "./spec",
+      --     port = 38698,
+      --     server = "127.0.0.1",
+      --     options = {
+      --       source_filetype = "ruby",
+      --     },
+      --     localfs = true,
+      --     waiting = 1000,
+      --   },
+      -- }
+    end,
   },
 }
