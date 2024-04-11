@@ -1,5 +1,3 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- Customize Mason plugins
 
 ---@type LazySpec
@@ -22,6 +20,7 @@ return {
     -- overrides `require("mason-null-ls").setup(...)`
     opts = function(_, opts)
       -- add more things to the ensure_installed table protecting against community packs modifying it
+      local null_ls = require "null-ls"
       opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
         "prettier",
         "stylua",
@@ -35,8 +34,12 @@ return {
     opts = function(_, opts)
       -- add more things to the ensure_installed table protecting against community packs modifying it
       opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
-        "python",
-        -- add more arguments for adding more debuggers
+        "stylua",
+        "docker-compose-language-service",
+        "erb_lint",
+        "marksman",
+        "zk",
+        "eslint",
       })
     end,
   },

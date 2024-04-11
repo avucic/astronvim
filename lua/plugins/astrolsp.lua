@@ -1,5 +1,3 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- AstroLSP allows you to customize the features in AstroNvim's LSP configuration engine
 -- Configuration documentation can be found with `:h astrolsp`
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
@@ -84,7 +82,7 @@ return {
     -- mappings to be set up on attaching of a language server
     mappings = {
       n = {
-        gl = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
+        -- gl = { function() vim.diagnostic.open_float() end, desc = "Hover diagnostics" },
         -- a `cond` key can provided as the string of a server capability to be required to attach, or a function with `client` and `bufnr` parameters from the `on_attach` that returns a boolean
         -- gD = {
         --   function() vim.lsp.buf.declaration() end,
@@ -96,6 +94,38 @@ return {
         --   desc = "Toggle LSP semantic highlight (buffer)",
         --   cond = function(client) return client.server_capabilities.semanticTokensProvider and vim.lsp.semantic_tokens end,
         -- },
+
+        -- https://github.com/AstroNvim/AstroNvim/blob/9626e38f38df46ed29afaa0d5b2a8cbdf619c003/lua/astronvim/plugins/_astrolsp_mappings.lua
+        ["<Leader>dc"] = {
+          "<cmd> RustLsp debug<cr>",
+          desc = "Start rust debugger",
+          cond = function(client) return client.name == "rust-analyzer" end,
+        },
+
+        ["gd"] = { "<cmd>Glance definitions<CR>", desc = "Definition" },
+        ["gI"] = { "<cmd>Glance implementations<cr>", desc = "Implementations" },
+        ["<Leader>le"] = { "<cmd>lua vim.diagnostic.setloclist()<cr>", desc = "Diagnostic buffer" },
+        ["<Leader>lw"] = { desc = "Workspace" },
+        ["<Leader>lwe"] = { "<cmd>lua vim.diagnostic.setqflist()<cr>", desc = "Diagnostic workspace" },
+        ["<Leader>lwa"] = { "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", desc = "Add" },
+        ["<Leader>lwr"] = { "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", desc = "Remove" },
+        ["<Leader>lws"] = {
+          "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>",
+          desc = "Workspace symbols",
+        },
+
+        ["<Leader>l?"] = { desc = "Info" },
+        ["<Leader>l?l"] = {
+          "<Cmd>LspInfo<CR>",
+          desc = "LSP information",
+          cond = function() return vim.fn.exists ":LspInfo" > 0 end,
+        },
+
+        ["<Leader>l?n"] = {
+          "<Cmd>NullLsInfo<CR>",
+          desc = "Null-ls information",
+          cond = function() return vim.fn.exists ":NullLsInfo" > 0 end,
+        },
       },
     },
     -- A custom `on_attach` function to be run after the default `on_attach` function
