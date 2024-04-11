@@ -2,6 +2,8 @@
 -- Configuration documentation can be found with `:h astrolsp`
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
+--
+local bundle_gemfile = os.getenv "BUNDLE_GEMFILE" or "~/.config/nvim/Gemfile"
 
 ---@type LazySpec
 return {
@@ -44,6 +46,25 @@ return {
     ---@diagnostic disable: missing-fields
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      solargraph = {
+        -- settings = {
+        --   solargraph = {
+        --     -- autoformat = true,
+        --     completion = true,
+        --     diagnostic = true,
+        --     -- folding = true,
+        --     references = true,
+        --     rename = true,
+        --     symbols = true,
+        --     -- useBundler = true,
+        --     -- bundlerPath = os.getenv("HOME") .. "/.asdf/shims/bundle",
+        --   },
+        -- },
+        cmd = { "bundle", "exec", "solargraph", "stdio" },
+        cmd_env = {
+          BUNDLE_GEMFILE = bundle_gemfile,
+        },
+      },
     },
     -- customize how language servers are attached
     handlers = {
