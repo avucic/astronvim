@@ -209,12 +209,6 @@ maps.n["<Leader>ym"] = { "<cmd>lua require('telescope').extensions.macroscope.de
 maps.n["<Leader>yD"] = { "<cmd>lua require('neoclip').clear_history()<cr>", desc = "Clear history" }
 maps.v["<leader>yy"] = { "<cmd>lua require('telescope').extensions.yank_history.yank_history()<cr>", desc = "History" }
 
--- Leap
-maps.n["s"] = { "<cmd>lua require('leap')<cr><Plug>(leap-forward-to)" }
-maps.n["S"] = { "<cmd>lua require('leap')<cr><Plug>(leap-backward-to)" }
-maps.n["gs"] = "<cmd>lua require('leap')<cr><Plug>(leap-from-window)"
-maps.n["<M-s>"] = { "<cmd>lua require('user.plugins.configs.leap').paranormal()<cr>" }
-
 -- T ------------------------------------------------------------------------------------
 maps.t["\\\\"] = { "<cmd>ToggleTermToggleAll<cr>" }
 maps.t["<c-q>"] = { "<C-\\><C-n>" }

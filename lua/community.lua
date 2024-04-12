@@ -23,7 +23,7 @@ return {
   { import = "astrocommunity.code-runner.sniprun" },
   { import = "astrocommunity.utility.telescope-live-grep-args-nvim" },
   { import = "astrocommunity.utility.nvim-toggler" },
-  { import = "astrocommunity.motion.leap-nvim" },
+  { import = "astrocommunity.motion.flash-nvim" },
   { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity/editing-support/true-zen-nvim" },
   { import = "astrocommunity/editing-support/text-case-nvim" },
@@ -35,7 +35,7 @@ return {
   { import = "astrocommunity.utility.noice-nvim" },
   { import = "astrocommunity.indent.indent-blankline-nvim" },
   { import = "astrocommunity/editing-support/multicursors-nvim" },
-
+  { import = "astrocommunity/editing-support/nvim-treesitter-endwise" },
   {
     "stevearc/overseer.nvim",
     init = function(_)
