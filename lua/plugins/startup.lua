@@ -19,6 +19,7 @@ return {
           { name = "PRICING_WALL", path = "~/Work/pricingwall.com/dev/pricing_wall" },
           { name = "DOTFILES", path = "~/dotfiles" },
           { name = "NVIM", path = "~/dotfiles/nvim/.config/nvim" },
+          { name = "NVIM_OLD", path = "~/dotfiles/nvim/.config/nvim_old" },
         },
       }
     end,
