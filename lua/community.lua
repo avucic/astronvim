@@ -42,15 +42,18 @@ return {
           ["<Leader>tT"] = { "<cmd>OverseerToggle<cr>", desc = "Toggle" },
           ["<Leader>tt"] = { "<cmd>OverseerRun<cr>", desc = "Run" },
           ["<Leader>tl"] = { "<cmd>OverseerRestartLast<cr>", desc = "last task" },
-          ["<Leader>to"] = { "<cmd>Other<cr>", desc = "Other file" },
-          ["<Leader>tO"] = { "<cmd>OtherClear<cr>", desc = "Other clear" },
           ["<Leader>ta"] = { "<cmd>OverseerQuickAction<cr>", desc = "Task action" },
         },
       }
     end,
-    config = function()
+    opts = {
+      strategy = "toggleterm",
+    },
+    config = function(_, opts)
+      local overseer = require "overseer"
+      overseer.setup(opts)
+
       vim.api.nvim_create_user_command("OverseerRestartLast", function()
-        local overseer = require "overseer"
         local tasks = overseer.list_tasks { recent_first = true }
         if vim.tbl_isempty(tasks) then
           vim.notify("No tasks found", vim.log.levels.WARN)
@@ -59,9 +62,6 @@ return {
         end
       end, {})
     end,
-    opts = {
-      strategy = "toggleterm",
-    },
   },
   {
     "Pocco81/true-zen.nvim",
