@@ -33,7 +33,6 @@ return {
   { import = "astrocommunity.motion.harpoon" },
   { import = "astrocommunity.utility.noice-nvim" },
   { import = "astrocommunity.indent.indent-blankline-nvim" },
-  { import = "astrocommunity.indent.mini-indentscope" },
 
   {
     "stevearc/overseer.nvim",
@@ -147,6 +146,24 @@ return {
           maps.n["gJ"] = maps.n["<Leader>m"]
           maps.n["<Leader>m"] = nil
         end,
+      },
+    },
+  },
+
+  {
+    "folke/noice.nvim",
+    opts = {
+      lsp = {
+        signature = { enabled = false },
+      },
+    },
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "User AstroFile",
+    opts = {
+      scope = {
+        enabled = true,
       },
     },
   },
