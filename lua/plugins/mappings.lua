@@ -31,14 +31,10 @@ maps.n["<S-l>"] =      { "$" }
 maps.n["<S-h>"] =      { "^" }
 maps.n["z="] =         { "<cmd>lua require('telescope.builtin').spell_suggest()<CR>" }
 maps.n["<Leader>W"] =  { "<cmd>:noa w<cr>", desc = "Save without format" }
--- maps.n["gV"] =      { "<cmd>lua require('tsht').nodes()<cr>" }
 maps.v["<c-f>"] =      { "y<ESC>:lua require('telescope.builtin').live_grep({default_text= vim.fn.getreg('*')})<CR>" }
-maps.v["gVa"] = maps.n["gVa"]
-maps.v["gVd"] = maps.n["gVd"]
 maps.v["<S-l>"] =      { "$", desc = "Jump to end of line" }
 maps.v["<S-h>"] =      { "^", desc = "Jump to the begging of line" }
 maps.v["p"] =          { '"_dP' }
--- maps.v["gV"] = { "<cmd>lua require('tsht').nodes()<cr>" }
 
 -- remove from Astrovim. TODO: better way?
 maps.n["<A-j>"] = { "<Nop>" }

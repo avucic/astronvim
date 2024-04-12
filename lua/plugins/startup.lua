@@ -20,6 +20,7 @@ return {
           { name = "DOTFILES", path = "~/dotfiles" },
           { name = "NVIM", path = "~/dotfiles/nvim/.config/nvim" },
           { name = "NVIM_OLD", path = "~/dotfiles/nvim/.config/nvim_old" },
+          { name = "TODO_TXT", path = "~/Work/todo-txt/Rust/todo-txt" },
         },
       }
     end,
