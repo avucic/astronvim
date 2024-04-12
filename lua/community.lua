@@ -20,6 +20,7 @@ return {
 
   -- { import = "astrocommunity.recipes.telescope-nvchad-theme" },
   { import = "astrocommunity.code-runner.overseer-nvim" },
+  { import = "astrocommunity.code-runner.sniprun" },
   { import = "astrocommunity.utility.telescope-live-grep-args-nvim" },
   { import = "astrocommunity.utility.nvim-toggler" },
   { import = "astrocommunity.motion.leap-nvim" },
@@ -166,5 +167,15 @@ return {
         enabled = true,
       },
     },
+  },
+
+  {
+    "michaelb/sniprun",
+    init = function(_)
+      require("astrocore").set_mappings {
+        n = { ["<Leader>rr"] = { "<cmd>SnipRun<cr>", desc = "Execute" } },
+        v = { ["<Leader>rr"] = { "<cmd>SnipRun<cr>", desc = "Execute" } },
+      }
+    end,
   },
 }

@@ -156,10 +156,7 @@ maps.n["<Leader>tp"] = false
 maps.n["<Leader>tv"] = false
 
 -- + Run
--- maps.n["<Leader>rf"] = { "<cmd>FlowRunFile<cr>", desc = "Run file" }
--- maps.n["<Leader>r;"] = { "<cmd>FlowLauncher<cr>", desc = "Run launcher" }
--- maps.n["<Leader>rl"] = { "<cmd>FlowRunLastCmd<cr>", desc = "Run last command" }
--- maps.n["<Leader>ro"] = { "<cmd>FlowLastOutput<cr>", desc = "Run last output" }
+maps.n["<Leader>r"] = { desc = "Run and execute" }
 
 -- +Jump
 maps.n["<Leader>j"] = { desc = "Jumping" }
