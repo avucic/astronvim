@@ -41,66 +41,55 @@ return {
       },
     },
     opts = function(_, opts)
-      -- local astrocore = require "astrocore"
-      -- print(vim.inspect(astrocore.which_key_queue()))
-      -- require("astrocore").set_mappings {
-      --   n = {
-      --     ["<Leader>ot"] = { desc = "Terminal" },
-      --     ["<Leader>otf"] = { "<cmd>lua require('plugins.toggleterm').open_terminal('float')<cr>", desc = "Float" },
-      --     ["<Leader>otv"] = { "<cmd>lua require('plugins.toggleterm').open_terminal('float')<cr>", desc = "Float" },
-      --   },
-      -- }
+      opts.size = function(term)
+        local max_vertical = 80
+        if term.direction == "horizontal" then
+          return 15
+        elseif term.direction == "vertical" then
+          local dynamic_size = vim.o.columns * 0.4
+          if dynamic_size > max_vertical then
+            return max_vertical
+          else
+            return dynamic_size
+          end
+        end
+      end
 
-      -- maps.n["<Leader>otf"] = opts.mappings["<Leader>tf"]
-      -- maps.n["<Leader>tf"] = nil
-      -- opts.size = function(term)
-      --   local max_vertical = 80
-      --   if term.direction == "horizontal" then
-      --     return 15
-      --   elseif term.direction == "vertical" then
-      --     local dynamic_size = vim.o.columns * 0.4
-      --     if dynamic_size > max_vertical then
-      --       return max_vertical
-      --     else
-      --       return dynamic_size
-      --     end
-      --   end
-      -- end
-      -- opts.on_create = function(term)
-      --   if term.direction ~= "float" then set_terminal_keymaps() end
-      -- end
+      opts.on_create = function(term)
+        if term.direction ~= "float" then set_terminal_keymaps() end
+      end
 
-      -- opts.on_open = function(term)
-      --   -- vim.cmd("startinsert!")
-      -- end,
+      opts.on_open = function(term)
+        -- vim.cmd("startinsert!")
+      end
       -- open_mapping = [[\\]],
-      -- opts.open_mapping = [[<c-\>]]
-      -- opts.persist_size = true
-      -- opts.shade_terminals = false
-      -- opts.shading_factor = -8
-      -- opts.insert_mappings = false
-      -- opts.terminal_mappings = false
-      -- opts.start_in_insert = true
-      -- opts.direction = default_direction
-      -- opts.highlights = {
-      --   -- border = "Normal",
-      --   -- background = "Normal",
-      --   -- highlights which map to a highlight group name and a table of it's values
-      --   -- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
-      --   -- Normal = {
-      --   --   guibg = "#ff6600",
-      --   -- },
-      --   -- NormalFloat = {
-      --   --   guifg = "#ff6600",
-      --   -- },
-      --   -- FloatBorder = {
-      --   --   guifg = "#1a1d24",
-      --   --   -- guibg = "<VALUE-HERE>",
-      --   -- },
-      -- }
-      -- opts.winbar = {
-      --   enabled = false,
-      -- }
+      opts.open_mapping = [[<c-\>]]
+      opts.persist_size = true
+      opts.shade_terminals = false
+      opts.shading_factor = -8
+      opts.insert_mappings = false
+      opts.terminal_mappings = false
+      opts.start_in_insert = true
+      opts.direction = default_direction
+      opts.highlights = {
+        -- border = "Normal",
+        -- background = "Normal",
+        -- highlights which map to a highlight group name and a table of it's values
+        -- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
+        -- Normal = {
+        --   guibg = "#ff6600",
+        -- },
+        -- NormalFloat = {
+        --   guifg = "#ff6600",
+        -- },
+        -- FloatBorder = {
+        --   guifg = "#1a1d24",
+        --   -- guibg = "<VALUE-HERE>",
+        -- },
+      }
+      opts.winbar = {
+        enabled = false,
+      }
     end,
   },
 }
