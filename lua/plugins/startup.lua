@@ -1,24 +1,26 @@
 return {
   {
-    "natecraddock/workspaces.nvim",
-    requires = { "nvim-telescope/telescope.nvim" },
+    "avucic/workspace.nvim",
+    dir = "~/Work/Neovim/workspace.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      {
+        "AstroNvim/astrocore",
+        opts = function(_, opts)
+          local maps = opts.mappings
+          maps.n["<Leader>fp"] = { require("workspace").tmux_sessions, desc = "List workspaces" }
+          maps.n["<Leader>fP"] = { require("workspace").workspaces, desc = "List workspaces" }
+        end,
+      },
+    },
     config = function()
-      require("workspaces").setup {
-        hooks = {
-          open = { "Telescope find_files" },
+      require("workspace").setup {
+        workspaces = {
+          { name = "PRICING_WALL", path = "~/Work/pricingwall.com/dev/pricing_wall" },
+          { name = "DOTFILES", path = "~/dotfiles" },
+          { name = "NVIM", path = "~/dotfiles/nvim/.config/nvim" },
         },
       }
     end,
-    cmd = {
-      "WorkspacesAdd",
-      "WorkspacesAddDir",
-      "WorkspacesRemove",
-      "WorkspacesRemoveDir",
-      "WorkspacesRename",
-      "WorkspacesListDirs",
-      "WorkspacesList",
-      "WorkspacesOpen",
-      "WorkspacesSyncDirs",
-    },
   },
 }

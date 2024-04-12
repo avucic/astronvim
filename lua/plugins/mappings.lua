@@ -70,11 +70,6 @@ maps.n["<Leader>fx"] = { "<cmd>OpenFile<cr>", desc = "Open file in folder" }
 maps.n["<Leader>fX"] = { "<cmd>OpenFolderInFinder<cr>", desc = "Open folder" }
 maps.v["<leader>fw"] = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args({default_text = require('core.utils').get_visual_selection()})<CR>", desc = "Live grep", }
 maps.n["<Leader>fC"] = false
-maps.n["<Leader>fp"] = { "<cmd>Telescope workspaces<CR>", desc = "List workspaces" }
-maps.n["<Leader>fP"] = { desc = "Workspaces" }
-maps.n["<Leader>fPa"] = { "<cmd>WorkspacesAdd<CR>", desc = "Add workspace" }
-maps.n["<Leader>fPd"] = { "<cmd>WorkspacesRemove<CR>", desc = "Remove workspace" }
-maps.n["<Leader>fPD"] = { ":WorkspacesRemove <right>", desc = "Remove workspace by name" }
 
 -- +Search
 maps.n["<Leader>s"] = { desc = "Search" }
