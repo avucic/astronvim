@@ -34,6 +34,7 @@ return {
   { import = "astrocommunity.motion.harpoon" },
   { import = "astrocommunity.utility.noice-nvim" },
   { import = "astrocommunity.indent.indent-blankline-nvim" },
+  { import = "astrocommunity/editing-support/multicursors-nvim" },
 
   {
     "stevearc/overseer.nvim",
@@ -177,5 +178,34 @@ return {
         v = { ["<Leader>rr"] = { "<cmd>SnipRun<cr>", desc = "Execute" } },
       }
     end,
+  },
+  {
+    "smoka7/multicursors.nvim",
+    keys = {
+      {
+        mode = { "n" },
+        "<M-n>",
+        "<cmd>MCunderCursor<cr>",
+        desc = "Create a selection for selected text or word under the cursor",
+      },
+      {
+        mode = { "v", "n" },
+        "<c-n>",
+        "<cmd>MCstart<cr>",
+        desc = "Create a selection for selected text or word under the cursor",
+      },
+      {
+        mode = { "n" },
+        "<M-r>",
+        "<cmd>MCpattern<cr>",
+        desc = "Create a selection for selected text or word under the cursor",
+      },
+      {
+        mode = { "v" },
+        "<M-r>",
+        "<cmd>MCvisualPattern<cr>",
+        desc = "Create a selection for selected text or word under the cursor",
+      },
+    },
   },
 }
