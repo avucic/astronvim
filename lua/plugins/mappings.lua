@@ -50,7 +50,7 @@ maps.n["<C-w>L"] = { "<cmd>lua require('smart-splits').resize_right()<cr><cmd>Wh
 
 -- tabs
 maps.n["<c-w>t"] = { desc = "Tabs" }
-maps.n["<c-w>tt"] = { "<cmd>lua require('telescope-tabs').list_tabs()<cr>", desc = "List tabs" }
+-- maps.n["<c-w>tt"] = { "<cmd>lua require('telescope-tabs').list_tabs()<cr>", desc = "List tabs" }
 maps.n["<c-w>tn"] = { "<cmd>tabnew<cr>", desc = "new tab" }
 maps.n["<c-w>tq"] = { "<cmd>tabclose<cr>", desc = "Close tab" }
 
@@ -85,7 +85,8 @@ maps.n["<Leader>bo"] = { "<Leader>bc", desc = "Close all buffers except current"
 maps.n["<Leader>bO"] = { "<Leader>bC", desc = "Close all", remap = true }
 maps.n["<Leader>bL"] = { function() require("astrocore.buffer").close_left() end, desc = "Close all buffers to the left" }
 maps.n["<Leader>bR"] = { function() require("astrocore.buffer").close_right() end, desc = "Close all buffers to the right" }
-maps.n["<Leader>br"] = false
+maps.n["<Leader>bp"] = false
+maps.n["<Leader>bl"] = false
 maps.n["<leader>bl"] = { "<cmd>lua require('astrocore.buffer').nav((vim.v.count > 0 and vim.v.count or 1))<cr><cmd>WhichKey <LT>leader>b<CR>", desc = "Next buffer", }
 maps.n["<leader>bh"] = { "<cmd>lua require('astrocore.buffer').nav(-(vim.v.count > 0 and vim.v.count or 1))<cr><cmd>WhichKey <LT>leader>b<CR>", desc = "Previous buffer", }
 maps.n["<leader>bq"] = { "<cmd>lua require('astrocore.buffer').close(0)<CR><cmd>WhichKey <LT>leader>b<CR>", desc = "Close" }

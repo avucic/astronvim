@@ -155,7 +155,6 @@ return {
       -- this would disable semanticTokensProvider for all clients
       -- client.server_capabilities.semanticTokensProvider = nil
       --
-      if client.supports_method "textDocument/signatureHelp" then require("lsp_signature").setup() end
     end,
   },
 }

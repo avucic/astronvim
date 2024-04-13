@@ -11,7 +11,7 @@ local lg_cmd = "lazygit"
 
 vim.env.GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
 
-local lazygit = Terminal:new({
+local lazygit = Terminal:new {
   cmd = lg_cmd,
   count = 5,
   direction = "float",
@@ -30,9 +30,8 @@ local lazygit = Terminal:new({
   on_open = function(term)
     -- vim.cmd("startinsert!")
     vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+    vim.cmd "startinsert!"
   end,
-})
+}
 
-function _LAZYGIT_TOGGLE()
-  lazygit:toggle()
-end
+function _LAZYGIT_TOGGLE() lazygit:toggle() end

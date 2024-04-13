@@ -69,7 +69,7 @@ return {
       opts.shading_factor = -8
       opts.insert_mappings = false
       opts.terminal_mappings = false
-      opts.start_in_insert = true
+      opts.start_in_insert = false
       opts.direction = default_direction
       opts.highlights = {
         -- border = "Normal",

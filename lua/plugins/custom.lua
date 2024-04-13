@@ -8,7 +8,7 @@ return {
         "AstroNvim/astrocore",
         opts = function(_, opts)
           local maps = opts.mappings
-          maps.n["ww"] = { "<cmd>lua require('user.core.plugins.window_picker').pick()<cr>" }
+          maps.n["ww"] = { "<cmd>lua require('plugins.custom.window_picker').pick()<cr>" }
           maps.n["<c-w>p"] = { "<cmd>lua require('plugins.custom.window_picker').pick()<cr>", desc = "Pick window" }
           maps.n["<c-w>d"] = {
             "<cmd>lua require('plugins.custom.window_picker').pick({delete = true })<cr>",

@@ -1,6 +1,6 @@
 local Terminal = require("toggleterm.terminal").Terminal
 
-local scratchpad = Terminal:new({
+local scratchpad = Terminal:new {
   cmd = "nvim scratchpad.md",
   dir = "~/Dropbox/Notes",
   direction = "float",
@@ -10,16 +10,12 @@ local scratchpad = Terminal:new({
     NormalFloat = {},
   },
   float_opts = {
-    width = function()
-      return math.floor(vim.o.columns * 0.5)
-    end,
+    width = function() return math.floor(vim.o.columns * 0.5) end,
 
-    height = function()
-      return math.floor((vim.o.lines - vim.o.cmdheight) * 0.5)
-    end,
+    height = function() return math.floor((vim.o.lines - vim.o.cmdheight) * 0.5) end,
   },
-})
 
-function _SCRATCHPAD_TOGGLE()
-  scratchpad:toggle()
-end
+  on_open = function(term) vim.cmd "startinsert!" end,
+}
+
+function _SCRATCHPAD_TOGGLE() scratchpad:toggle() end

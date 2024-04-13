@@ -52,8 +52,9 @@ return {
         "AstroNvim/astrocore",
         opts = function(_, opts)
           local maps = opts.mappings
-          maps.v["<leader>xge"] = { ":'<,'>Translate English<CR>", desc = "english" }
-          maps.v["<leader>xgs"] = { ":'<,'>Translate Serbian<CR>", desc = "serbian" }
+          maps.v["<leader>xg"] = { desc = "Translate" }
+          maps.v["<leader>xge"] = { ":'<,'>Translate English<CR>", desc = "English" }
+          maps.v["<leader>xgs"] = { ":'<,'>Translate Serbian<CR>", desc = "Serbian" }
         end,
       },
     },

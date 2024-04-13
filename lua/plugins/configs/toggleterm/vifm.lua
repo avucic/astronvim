@@ -1,5 +1,5 @@
 local Terminal = require("toggleterm.terminal").Terminal
-local Path = require("plenary.path")
+local Path = require "plenary.path"
 local tmp_path = "/tmp/nvim-vifm"
 
 function Rename(old, new)
@@ -22,13 +22,13 @@ function Rename(old, new)
     end
   end
 
-  vim.cmd([[BWnex]])
+  vim.cmd [[BWnex]]
   vim.notify = orig
 end
 
 function _VIFM_TOGGLE(dir_arg)
-  local current_file = vim.fn.expand("%:p")
-  local current_file_name = vim.fn.expand("%")
+  local current_file = vim.fn.expand "%:p"
+  local current_file_name = vim.fn.expand "%"
   local cmd
   if dir_arg ~= nil or current_file_name == "" then
     cmd = ('vifm --choose-files "%s"'):format(tmp_path)
@@ -37,25 +37,22 @@ function _VIFM_TOGGLE(dir_arg)
   end
 
   if current_file ~= "" and dir_arg == nil then
-    cmd = cmd .. " " .. vim.fn.expand("%:p:h")
+    cmd = cmd .. " " .. vim.fn.expand "%:p:h"
   elseif dir_arg ~= nil then
     cmd = cmd .. " " .. dir_arg
   else
     cmd = cmd .. " ."
   end
 
-  local vifm = Terminal:new({
+  local vifm = Terminal:new {
     cmd = cmd,
     direction = "float",
     close_on_exit = true,
+    start_in_insert = true,
     float_opts = {
-      width = function()
-        return math.floor(vim.o.columns * 0.5)
-      end,
+      width = function() return math.floor(vim.o.columns * 0.5) end,
 
-      height = function()
-        return math.floor((vim.o.lines - vim.o.cmdheight) * 0.5)
-      end,
+      height = function() return math.floor((vim.o.lines - vim.o.cmdheight) * 0.5) end,
     },
     highlights = {
       NormalFloat = {},
@@ -67,16 +64,14 @@ function _VIFM_TOGGLE(dir_arg)
       vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<c-e>", "<C-\\><C-n>il", { silent = true })
       vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<c-v>", "<C-\\><C-n>:vsplit<CR>il", { silent = true })
       vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<c-s>", "<C-\\><C-n>:split<CR>il", { silent = true })
+
+      vim.cmd "startinsert!"
     end,
     on_close = function()
       data = Path:new(tmp_path):read()
-      if data ~= "" then
-        vim.schedule(function()
-          vim.cmd("e " .. data)
-        end)
-      end
+      if data ~= "" then vim.schedule(function() vim.cmd("e " .. data) end) end
     end,
-  })
+  }
 
   vifm:toggle()
 end

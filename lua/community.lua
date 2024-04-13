@@ -25,23 +25,24 @@ return {
   { import = "astrocommunity.utility.nvim-toggler" },
   { import = "astrocommunity.motion.flash-nvim" },
   { import = "astrocommunity.motion.nvim-surround" },
-  { import = "astrocommunity/editing-support/true-zen-nvim" },
-  { import = "astrocommunity/editing-support/text-case-nvim" },
-  { import = "astrocommunity/editing-support/treesj" },
-  { import = "astrocommunity/editing-support/dial-nvim" },
-  { import = "astrocommunity/split-and-window/windows-nvim" },
+  { import = "astrocommunity.motion.before-nvim" },
+  { import = "astrocommunity.editing-support.true-zen-nvim" },
+  { import = "astrocommunity.editing-support.text-case-nvim" },
+  { import = "astrocommunity.editing-support.treesj" },
+  { import = "astrocommunity.editing-support.dial-nvim" },
+  { import = "astrocommunity.split-and-window/windows-nvim" },
   { import = "astrocommunity.debugging.nvim-bqf" },
   { import = "astrocommunity.motion.harpoon" },
   { import = "astrocommunity.utility.noice-nvim" },
   { import = "astrocommunity.indent.indent-blankline-nvim" },
-  { import = "astrocommunity/editing-support/multicursors-nvim" },
-  { import = "astrocommunity/editing-support/nvim-treesitter-endwise" },
+  { import = "astrocommunity.editing-support.multicursors-nvim" },
+  { import = "astrocommunity.editing-support.nvim-treesitter-endwise" },
   {
     "stevearc/overseer.nvim",
     init = function(_)
       require("astrocore").set_mappings {
         n = {
-          ["<Leader>tT"] = { "<cmd>OverseerToggle<cr>", desc = "Toggle" },
+          ["<Leader>t<cr>"] = { "<cmd>OverseerToggle<cr>", desc = "Toggle" },
           ["<Leader>tt"] = { "<cmd>OverseerRun<cr>", desc = "Run" },
           ["<Leader>tl"] = { "<cmd>OverseerRestartLast<cr>", desc = "last task" },
           ["<Leader>ta"] = { "<cmd>OverseerQuickAction<cr>", desc = "Task action" },
@@ -78,11 +79,11 @@ return {
           maps.n["<c-w>uf"] = maps.n["<Leader>zf"]
           maps.n["<c-w>um"] = maps.n["<Leader>zm"]
           maps.n["<c-w>un"] = maps.n["<Leader>zn"]
-          maps.n["<Leader>z"] = false
-          maps.n["<Leader>za"] = false
-          maps.n["<Leader>zf"] = false
-          maps.n["<Leader>zm"] = false
-          maps.n["<Leader>zn"] = false
+          -- maps.n["<Leader>z"] = false
+          -- maps.n["<Leader>za"] = false
+          -- maps.n["<Leader>zf"] = false
+          -- maps.n["<Leader>zm"] = false
+          -- maps.n["<Leader>zn"] = false
         end,
       },
     },
