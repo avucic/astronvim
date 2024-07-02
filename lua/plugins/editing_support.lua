@@ -20,18 +20,30 @@ return {
     },
   },
   {
-
-    "mfussenegger/nvim-treehopper",
-    event = "VeryLazy",
-    dependencies = {
+    "chrisgrieser/nvim-spider",
+    event = { "User AstroFile" },
+    -- opts = {
+    --   skipInsignificantPunctuation = false,
+    -- },
+    keys = {
       {
-        "AstroNvim/astrocore",
-        opts = function(_, opts)
-          local maps = opts.mappings
-          maps.n["gV"] = { "<cmd>lua require('tsht').nodes()<cr>" }
-          maps.v["gV"] = { "<cmd>lua require('tsht').nodes()<cr>" }
-        end,
+        "e",
+        "<cmd>lua require('spider').motion('e')<CR>",
+        mode = { "n", "o", "x" },
       },
+
+      {
+        "w",
+        "<cmd>lua require('spider').motion('w')<CR>",
+        mode = { "n", "o", "x" },
+      },
+
+      {
+        "b",
+        "<cmd>lua require('spider').motion('b')<CR>",
+        mode = { "n", "o", "x" },
+      },
+      -- ...
     },
   },
 }

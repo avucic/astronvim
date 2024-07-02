@@ -12,5 +12,8 @@ vim.filetype.add {
   },
   pattern = {
     ["~/%.config/foo/.*"] = "fooscript",
+    [".env.*"] = "sh",
   },
 }
+
+vim.opt.conceallevel = 3

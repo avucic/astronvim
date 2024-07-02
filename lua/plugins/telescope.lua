@@ -1,4 +1,5 @@
 -- AstroCommunity: import any community modules here
+--
 return {
   {
     "nvim-telescope/telescope.nvim",

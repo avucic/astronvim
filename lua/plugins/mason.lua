@@ -40,6 +40,7 @@ return {
         "marksman",
         "zk",
         "eslint",
+        "js-debug-adapter",
       })
     end,
   },

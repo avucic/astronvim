@@ -158,10 +158,10 @@ return function(_, _)
     --   },
     -- },
     extensions = {
-      workspaces = {
-        -- keep insert mode after selection in the picker, default is false
-        keep_insert = true,
-      },
+      -- workspaces = {
+      --   -- keep insert mode after selection in the picker, default is false
+      --   keep_insert = true,
+      -- },
       fzf = {
         fuzzy = true, -- false will only do exact matching
         override_generic_sorter = true, -- override the generic sorter
@@ -180,48 +180,52 @@ return function(_, _)
         filetypes = { "png", "webp", "jpg", "jpeg", "gif" },
         find_cmd = "rg", -- find command (defaults to `fd`)
       },
-      tailiscope = {
-        -- register to copy classes to on selection
-        register = [[*]],
-        -- indicates what picker opens when running Telescope tailiscope
-        -- can be any file inside of docs dir but most useful opts are
-        -- all, base, categories, classes
-        -- These are also accesible by running Telescope tailiscope <picker>
-        default = "base",
-        -- icon indicates an item which can be opened in tailwind docs
-        -- can be icon or false
-        doc_icon = "",
-        -- if you would prefer to copy with/without class selector
-        -- dot is maintained in display to differentiate class from other pickers
-        no_dot = true,
-        maps = {
-          i = {
-            -- back = "<C-h>",
-            open_doc = "<C-o>",
-          },
-          n = {
-            back = "<BS>",
-            open_doc = "od",
-          },
-        },
-      },
-      live_grep_args = {
-        auto_quoting = true, -- enable/disable auto-quoting
-        -- define mappings, e.g.
-        mappings = { -- extend mappings
-          i = {
-            ["<C-k>"] = lga_actions.quote_prompt(),
-            ["<C-i>"] = lga_actions.quote_prompt { postfix = " --iglob " },
-          },
-        },
-        -- ... also accepts theme settings, for example:
-        -- theme = "dropdown", -- use dropdown theme
-        -- theme = { }, -- use own theme spec
-        -- layout_config = { mirror=true }, -- mirror preview pane
-      },
-      project = {
-        patterns = { ".git", "Makefile", "package.json", "Gemfile" },
-      },
+      -- tailiscope = {
+      --   -- register to copy classes to on selection
+      --   register = [[*]],
+      --   -- indicates what picker opens when running Telescope tailiscope
+      --   -- can be any file inside of docs dir but most useful opts are
+      --   -- all, base, categories, classes
+      --   -- These are also accesible by running Telescope tailiscope <picker>
+      --   default = "base",
+      --   -- icon indicates an item which can be opened in tailwind docs
+      --   -- can be icon or false
+      --   doc_icon = "",
+      --   -- if you would prefer to copy with/without class selector
+      --   -- dot is maintained in display to differentiate class from other pickers
+      --   no_dot = true,
+      --   maps = {
+      --     i = {
+      --       -- back = "<C-h>",
+      --       open_doc = "<C-o>",
+      --     },
+      --     n = {
+      --       back = "<BS>",
+      --       open_doc = "od",
+      --     },
+      --   },
+      -- },
+      -- live_grep_args = {
+      --   auto_quoting = true, -- enable/disable auto-quoting
+      --   -- define mappings, e.g.
+      --   mappings = { -- extend mappings
+      --     i = {
+      --       ["<C-k>"] = lga_actions.quote_prompt(),
+      --       ["<C-i>"] = lga_actions.quote_prompt { postfix = " --iglob " },
+      --     },
+      --     n = {
+      --       ["<C-k>"] = lga_actions.quote_prompt(),
+      --       ["<C-i>"] = lga_actions.quote_prompt { postfix = " --iglob " },
+      --     },
+      --   },
+      --   -- ... also accepts theme settings, for example:
+      --   -- theme = "dropdown", -- use dropdown theme
+      --   -- theme = { }, -- use own theme spec
+      --   -- layout_config = { mirror=true }, -- mirror preview pane
+      -- },
+      -- project = {
+      --   patterns = { ".git", "Makefile", "package.json", "Gemfile" },
+      -- },
     },
   }
 end

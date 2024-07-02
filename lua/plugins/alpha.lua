@@ -87,20 +87,20 @@ return {
         -- },
       }
 
-      vim.defer_fn(function()
-        local function cr_lines(s) return s:gsub("\r\n?", "\n"):gmatch "(.-)\n" end
-
-        if vim.o.filetype == "alpha" then
-          local handle = io.popen "topydo ls due:today"
-          local result = handle:read "*a"
-          handle:close()
-
-          for s in result:gmatch "[^\n]+" do
-            table.insert(lines, s)
-          end
-          vim.cmd [[AlphaRedraw]]
-        end
-      end, 1)
+      -- vim.defer_fn(function()
+      --   local function cr_lines(s) return s:gsub("\r\n?", "\n"):gmatch "(.-)\n" end
+      --
+      --   if vim.o.filetype == "alpha" then
+      --     local handle = io.popen "topydo ls due:today"
+      --     local result = handle:read "*a"
+      --     handle:close()
+      --
+      --     for s in result:gmatch "[^\n]+" do
+      --       table.insert(lines, s)
+      --     end
+      --     vim.cmd [[AlphaRedraw]]
+      --   end
+      -- end, 1)
 
       return opts
     end,

@@ -16,7 +16,9 @@ return {
     config = function()
       require("workspace").setup {
         workspaces = {
+          { name = "PRICING_WALL-RUBY", path = "~/Work/pricingwall.com/dev/pricing_wall-ruby" },
           { name = "PRICING_WALL", path = "~/Work/pricingwall.com/dev/pricing_wall" },
+          { name = "DROPONGO", path = "~/Work/Dropongo/Development/dropongo" },
           { name = "DOTFILES", path = "~/dotfiles" },
           { name = "NVIM", path = "~/dotfiles/nvim/.config/nvim" },
           { name = "NVIM_OLD", path = "~/dotfiles/nvim/.config/nvim_old" },

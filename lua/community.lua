@@ -13,6 +13,8 @@ return {
   { import = "astrocommunity.pack.go" },
   { import = "astrocommunity.pack.html-css" },
   { import = "astrocommunity.pack.markdown" },
+  { import = "astrocommunity.pack.tailwindcss" },
+  { import = "astrocommunity.pack.typescript-all-in-one" },
 
   -- TODO:
   -- 1.fix telescope-nvchad-theme
@@ -26,6 +28,7 @@ return {
   { import = "astrocommunity.motion.flash-nvim" },
   { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.motion.before-nvim" },
+  { import = "astrocommunity.motion.mini-move" },
   { import = "astrocommunity.editing-support.true-zen-nvim" },
   { import = "astrocommunity.editing-support.text-case-nvim" },
   { import = "astrocommunity.editing-support.treesj" },
@@ -37,6 +40,120 @@ return {
   { import = "astrocommunity.indent.indent-blankline-nvim" },
   { import = "astrocommunity.editing-support.multicursors-nvim" },
   { import = "astrocommunity.editing-support.nvim-treesitter-endwise" },
+  { import = "astrocommunity.editing-support.yanky-nvim" },
+  { import = "astrocommunity.note-taking.zk-nvim" },
+  {
+    "zk-org/zk-nvim",
+    config = require("plugins.custom.zk").config,
+    cmd = {
+      "ZkOrphahs",
+      "ZkLink",
+      "ZkGrep",
+      "ZkIndex",
+      "ZkNew",
+      "ZkNewFromTitleSelection",
+      "ZkNewFromContentSelection",
+      "ZkCd",
+      "ZkNotes",
+      "ZkBacklinks",
+      "ZkLinks",
+      "ZkInsertLinkAtSelection",
+      "ZkInsertLink",
+      "ZkMatch",
+      "ZkTags",
+      "ZkFindOrCreate",
+      "ZkFindOrCreateJournalDailyNote",
+      "ZkOpenNotes",
+      "ZkFindOrCreateNote",
+      "ZkFindOrCreateProjectNote",
+    },
+  },
+  {
+    "ray-x/go.nvim",
+    dependencies = {
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = {
+      go = "go",
+      -- disable_defaults = true,
+      -- diagnostic = false,
+    },
+    event = { "CmdlineEnter" },
+    ft = { "go", "gomod" },
+    -- Prevents Neovim from freezing on plugin installation/update.
+    -- See: <https://github.com/ray-x/go.nvim/issues/433>
+    build = function() require("go.install").update_all() end,
+  },
+
+  {
+    "nvim-telescope/telescope-live-grep-args.nvim",
+    config = function()
+      local lga_actions = require "telescope-live-grep-args.actions"
+      local actions = require "telescope.actions"
+      local telescope = require "telescope"
+
+      -- first setup telescope
+      telescope.setup {
+        -- your config
+        extensions = {
+          live_grep_args = {
+            auto_quoting = true, -- enable/disable auto-quoting
+            -- define mappings, e.g.
+            mappings = { -- extend mappings
+              i = {
+                ["<C-k>"] = lga_actions.quote_prompt(),
+                ["<C-i>"] = lga_actions.quote_prompt { postfix = " --iglob " },
+                -- freeze the current list and start a fuzzy search in the frozen list
+                ["<C-space>"] = actions.to_fuzzy_refine,
+              },
+            },
+            -- ... also accepts theme settings, for example:
+            -- theme = "dropdown", -- use dropdown theme
+            -- theme = { }, -- use own theme spec
+            -- layout_config = { mirror=true }, -- mirror preview pane
+          },
+        },
+      }
+
+      -- then load the extension
+      -- telescope.load_extension "live_grep_args"
+    end,
+  },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    dependencies = {
+      {
+        "AstroNvim/astrocore",
+        opts = function(_, opts)
+          local maps = opts.mappings
+
+          maps.x["gV"] = maps.x["S"]
+          maps.o["gV"] = maps.o["S"]
+          maps.n["gV"] = maps.n["S"]
+
+          maps.x["S"] = nil
+          maps.o["S"] = nil
+          maps.n["S"] = nil
+        end,
+      },
+    },
+  },
+  {
+    "gbprod/yanky.nvim",
+    dependencies = {
+      {
+        "AstroNvim/astrocore",
+        opts = function(_, opts)
+          local maps = opts.mappings
+          maps.n["<Leader>y"] = { desc = "Yank" }
+          maps.n["<Leader>yy"] = { "<Cmd>Telescope yank_history<CR>", desc = "Find yanks" }
+        end,
+      },
+    },
+  },
   {
     "stevearc/overseer.nvim",
     init = function(_)
@@ -49,8 +166,35 @@ return {
         },
       }
     end,
+    cmd = { "OverseerRestartLast" },
     opts = {
-      strategy = "toggleterm",
+      strategy = {
+        "toggleterm",
+        -- load your default shell before starting the task
+        use_shell = false,
+        -- overwrite the default toggleterm "direction" parameter
+        direction = "horizontal",
+        -- overwrite the default toggleterm "highlights" parameter
+        highlights = nil,
+        -- overwrite the default toggleterm "auto_scroll" parameter
+        auto_scroll = nil,
+        -- have the toggleterm window close and delete the terminal buffer
+        -- automatically after the task exits
+        close_on_exit = false,
+        -- have the toggleterm window close without deleting the terminal buffer
+        -- automatically after the task exits
+        -- can be "never, "success", or "always". "success" will close the window
+        -- only if the exit code is 0.
+        quit_on_exit = "never",
+        -- open the toggleterm window when a task starts
+        open_on_start = true,
+        -- mirrors the toggleterm "hidden" parameter, and keeps the task from
+        -- being rendered in the toggleable window
+        hidden = true,
+        -- command to run when the terminal is created. Combine with `use_shell`
+        -- to run a terminal command before starting the task
+        on_create = nil,
+      },
     },
     config = function(_, opts)
       local overseer = require "overseer"
@@ -183,6 +327,16 @@ return {
   {
     "smoka7/multicursors.nvim",
     keys = {
+      {
+        mode = { "n" },
+        "<Leader>m",
+        false,
+      },
+      {
+        mode = { "v" },
+        "<Leader>m",
+        false,
+      },
       {
         mode = { "n" },
         "<M-n>",

@@ -6,7 +6,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
       -- add more things to the ensure_installed table protecting against community packs modifying it
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
+      -- opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
+      opts.ensure_installed = {
         "ruby",
         "go",
         "html",
@@ -14,7 +15,7 @@ return {
         "scss",
         "bash",
         "cmake",
-        "dockerfile",
+        -- "dockerfile",
         "hcl",
         "regex",
         "javascript",
@@ -34,12 +35,12 @@ return {
         "toml",
         "sql",
         "svelte",
-        "dockerfile",
         "make",
         "zig",
         "kdl",
         -- add more arguments for adding more treesitter parsers
-      })
+        -- })
+      }
 
       opts.context_commentstring = {
         enable = true,

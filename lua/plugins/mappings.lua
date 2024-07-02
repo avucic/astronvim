@@ -64,59 +64,44 @@ maps.n["<Leader>fy"] = { "<cmd>let @*=expand('%')<cr>", desc = "Yank file path" 
 maps.n["<Leader>fY"] = { "<cmd>let @*=expand('%:p')<cr>", desc = "Yank full file path" }
 maps.n["<Leader>fx"] = { "<cmd>OpenFile<cr>", desc = "Open file in folder" }
 maps.n["<Leader>fX"] = { "<cmd>OpenFolderInFinder<cr>", desc = "Open folder" }
+maps.n["<leader>fw"] = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", desc = "Live grep", }
 maps.v["<leader>fw"] = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args({default_text = require('core.utils').get_visual_selection()})<CR>", desc = "Live grep", }
+maps.v["<leader>fR"] = { "<cmd>e %<CR>", desc = "Reload file", }
 maps.n["<Leader>fC"] = false
+maps.n["<Leader>fk"] = false
 
 -- +Search
 maps.n["<Leader>s"] = { desc = "Search" }
 maps.n["<leader>sc"] = { "<cmd>lua require('telescope.builtin').commands()<CR>", desc = "Commands" }
+maps.n["<leader>sk"] = { "<cmd>lua require('telescope.builtin').keymaps()<CR>", desc = "Keymaps" }
 maps.n["<Leader>s;"] = { "<cmd>lua require('telescope.builtin').command_history()<CR>", desc = "Command History" }
 maps.n["<Leader>st"] = { "<cmd>TodoTelescope<cr>", desc = "Todo list" }
 maps.n["<leader>sb"] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", desc = "Buffers" }
 maps.n["<Leader>sn"] = { function() require("telescope").extensions.notify.notify() end, desc = "Find notifications" }
 maps.n["<leader>s<cr>"] = { "<cmd>lua require('telescope.builtin').resume()<CR>", desc = "Resume" }
--- maps.n["<leader>sh"] = { "<cmd>lua require('telescope.builtin').help_tags()<CR>", desc = "Help" }
--- maps.n["<leader>sk"] = { "<cmd>lua require('telescope.builtin').keymaps()<CR>", desc = "Keymaps" }
--- maps.n["<leader>sO"] = { "<cmd>lua require('telescope.builtin').vim_options()<CR>", desc = "Options" }
--- maps.n["<leader>s;"] = { "<cmd>lua require('telescope.builtin').command_history()<CR>", desc = "History" }
 
 -- +Buffers
 maps.n["<Leader>bo"] = { "<Leader>bc", desc = "Close all buffers except current", remap = true }
 maps.n["<Leader>bO"] = { "<Leader>bC", desc = "Close all", remap = true }
-maps.n["<Leader>bL"] = { function() require("astrocore.buffer").close_left() end, desc = "Close all buffers to the left" }
-maps.n["<Leader>bR"] = { function() require("astrocore.buffer").close_right() end, desc = "Close all buffers to the right" }
+maps.n["<Leader>bR"] = { function() require("astrocore.buffer").close_left() end, desc = "Close all buffers to the right" }
+maps.n["<Leader>bL"] = { function() require("astrocore.buffer").close_right() end, desc = "Close all buffers to the left" }
 maps.n["<Leader>bp"] = false
 maps.n["<Leader>bl"] = false
 maps.n["<leader>bl"] = { "<cmd>lua require('astrocore.buffer').nav((vim.v.count > 0 and vim.v.count or 1))<cr><cmd>WhichKey <LT>leader>b<CR>", desc = "Next buffer", }
 maps.n["<leader>bh"] = { "<cmd>lua require('astrocore.buffer').nav(-(vim.v.count > 0 and vim.v.count or 1))<cr><cmd>WhichKey <LT>leader>b<CR>", desc = "Previous buffer", }
 maps.n["<leader>bq"] = { "<cmd>lua require('astrocore.buffer').close(0)<CR><cmd>WhichKey <LT>leader>b<CR>", desc = "Close" }
+-- maps.n["<leader>bd"] = { "<cmd>lua require('astroui.status.heirline').buffer_picker(function(bufnr) require('astrocore.buffer').close(bufnr) end)<CR><cmd>WhichKey <Leader>b<CR>", desc = "Clooooooooooooooose" }
+maps.n["<Leader>bd"] = false
+maps.n["<leader>bd"] = {
+  function()
+    require('astroui.status.heirline').buffer_picker(
+      function(bufnr)
+        require('astrocore.buffer').close(bufnr);
+        require('which-key').show_command("<Leader>bd");
+      end
+    )
+end, desc = "Pick from tabline and close" }
 maps.n["<leader>bQ"] = { "<cmd>q<cr>", desc = "Force close", }
-
--- maps.n["<Leader>bc"] = false
--- maps.n["<Leader>bC"] = false
--- maps.n["<Leader>bb"] = false
-
--- maps.n["<Leader>bb"] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", desc = "History" }
--- maps.n["<Leader>bo"] = { function() require("astronvim.utils.buffer").close_all(true) end, desc = "Close all buffers except current" }
--- maps.n["<Leader>bl"] = {
---   "<cmd>lua require('astronvim.utils.buffer').nav((vim.v.count > 0 and vim.v.count or 1))<cr><cmd>WhichKey <LT>leader>b<CR>",
---   desc = "Next buffer",
--- }
--- maps.n["<Leader>bh"] = {
---   "<cmd>lua require('astronvim.utils.buffer').nav(-(vim.v.count > 0 and vim.v.count or 1))<cr><cmd>WhichKey <LT>leader>b<CR>",
---   desc = "Previous buffer",
--- }
--- maps.n["<Leader>bp"] = {
---   "<cmd>lua require('astronvim.utils.status').heirline.buffer_picker(function(bufnr) vim.api.nvim_win_set_buf(0, bufnr) end)<CR>",
---   desc = "Pick",
--- }
--- maps.n["<Leader>bq"] =
---   { "<cmd>lua require('astronvim.utils.buffer').close(0)<CR><cmd>WhichKey <LT>leader>b<CR>", desc = "Close" }
--- maps.n["<Leader>bQ"] = { "<cmd>q<cr>", desc = "Force close" }
--- maps.n["<Leader>b-"] = {
---   "<cmd>lua require('astronvim.utils.status').heirline.buffer_picker(function(bufnr) vim.cmd.split() vim.api.nvim_win_set_buf(0, bufnr) end)<CR>",
---   desc = "Split horizontally",
--- }
 
 -- +Git
 maps.n["<Leader>gf"] = { "<cmd>Easypick changed_files<cr>", desc = "List changed files" }
@@ -137,6 +122,7 @@ maps.v["<leader>gdl"] = { "<cmd>lua require('telescope').extensions.advanced_git
 maps.n["<Leader>gdb"] = { "<cmd>lua require('telescope').extensions.advanced_git_search.diff_branch_file()<cr>", desc = "Diff branch file" }
 maps.n["<Leader>gdf"] = { "<cmd>lua require('telescope').extensions.advanced_git_search.diff_commit_file()<cr>", desc = "Search file" }
 maps.n["<Leader>gds"] = { "<cmd>lua require('telescope').extensions.advanced_git_search.search_log_content()<cr>", desc = "Search log" }
+maps.n["<Leader>gg"] = false
 maps.n["<Leader>gt"] = false
 maps.n["<Leader>gS"] = false
 --
@@ -155,6 +141,9 @@ maps.n["<Leader>tv"] = false
 -- + Run
 maps.n["<Leader>r"] = { desc = "Run and execute" }
 
+-- + Local language mappings
+maps.n["<Leader>m"] = { desc = "Local language mappings" }
+
 -- +Jump
 maps.n["<Leader>j"] = { desc = "Jumping" }
 maps.n["<Leader>jn"] = { "<cmd>lua require('aerial').next()<cr><cmd>WhichKey <LT>leader>j<CR>", desc = "Aerial next" }
@@ -169,18 +158,18 @@ maps.n["<Leader>ni"] = { "<cmd>ZkOpenNotebook<CR>", desc = "Open notebook" }
 maps.n["<Leader>n."] = { "<Cmd>ZkCd<CR>", desc = "cdw" }
 maps.n["<Leader>nR"] = { "<Cmd>ZkIndex<CR>", desc = "Reindex" }
 maps.n["<Leader>nc"] = { "<cmd>ZkShowCalendar<cr>", desc = "Calendar" }
-maps.n["<Leader>nnr"] = { "<cmd>:ZkFindOrCreateNote { group='reference_notes', dir='references'}<cr>", desc = "Reference note" }
-maps.n["<Leader>nns"] = { "<cmd>:ZkFindOrCreateNote { group='permanent_notes', dir='slip-box'}<cr>", desc = "Slip note" }
-maps.n["<Leader>nnd"] = { "<cmd>:ZkFindOrCreateNote { group='fleeting_notes', dir='dalily_notes'}<cr>", desc = "Daily note" }
-maps.n["<Leader>nnl"] = { "<cmd>:ZkFindOrCreateNote { group='literature_notes', dir='literature_notes'}<cr>", desc = "Literature note" }
-maps.n["<Leader>nnp"] = { "<cmd>:ZkFindOrCreateProjectNote<cr>", desc = "Project note" }
+maps.n["<Leader>nnr"] = { "<cmd>ZkFindOrCreateNote { group='reference_notes', dir='references'}<cr>", desc = "Reference note" }
+maps.n["<Leader>nns"] = { "<cmd>ZkFindOrCreateNote { group='permanent_notes', dir='slip-box'}<cr>", desc = "Slip note" }
+maps.n["<Leader>nnd"] = { "<cmd>ZkFindOrCreateNote { group='fleeting_notes', dir='dalily_notes'}<cr>", desc = "Daily note" }
+maps.n["<Leader>nnl"] = { "<cmd>ZkFindOrCreateNote { group='literature_notes', dir='literature_notes'}<cr>", desc = "Literature note" }
+maps.n["<Leader>nnp"] = { "<cmd>ZkFindOrCreateProjectNote<cr>", desc = "Project note" }
 maps.n["<Leader>ntt"] = { "<cmd>lua _TASKS_TOGGLE()<CR>", desc = "Tasks today" }
 
-maps.n["<Leader>nfg"] = { "<Cmd>ZkGrep<CR>", desc = "Grep" }
+maps.n["<Leader>nfw"] = { "<Cmd>ZkGrep<CR>", desc = "Grep" }
 maps.n["<Leader>nft"] = { "<Cmd>ZkTags<CR>", desc = "By tags" }
-maps.n["<Leader>nfl"] = { "<Cmd>ZkTags<CR>", desc = "Links" }
-maps.n["<Leader>nfb"] = { "<Cmd>ZkTags<CR>", desc = "Backlinks" }
-maps.n["<Leader>nfo"] = { "<Cmd>ZkTags<CR>", desc = "Orphans" }
+maps.n["<Leader>nfl"] = { "<Cmd>ZkLinks<CR>", desc = "Links" }
+maps.n["<Leader>nfb"] = { "<Cmd>ZkBacklinks<CR>", desc = "Backlinks" }
+maps.n["<Leader>nfo"] = { "<Cmd>ZkOrphans<CR>", desc = "Orphans" }
 
 maps.n["<Leader>njd"] = { "<cmd>ZkFindOrCreateJournalDailyNote<cr>", desc = "New dalily journal" }
 maps.n["<Leader>njf"] = { "<cmd>ZkNew{group='fer', dir='journal/fer'}<cr>", desc = "New fer session" }
