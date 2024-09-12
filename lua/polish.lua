@@ -6,6 +6,9 @@
 vim.filetype.add {
   extension = {
     foo = "fooscript",
+    mdx = "markdown",
+    mjml = "eruby",
+    cedarschema = "cedar",
   },
   filename = {
     ["Foofile"] = "fooscript",
@@ -13,7 +16,17 @@ vim.filetype.add {
   pattern = {
     ["~/%.config/foo/.*"] = "fooscript",
     [".env.*"] = "sh",
+    ["vifmrc"] = "vim",
   },
 }
+
+vim.filetype.add {
+  extension = {
+    cedar = "cedar",
+  },
+}
+
+local ft = require "Comment.ft"
+ft.set("cedar", { "//%s" })
 
 vim.opt.conceallevel = 3

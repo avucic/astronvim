@@ -10,6 +10,7 @@ return {
     "princejoogie/dir-telescope.nvim",
     -- telescope.nvim is a required dependency
     requires = { "nvim-telescope/telescope.nvim" },
+    event = "VeryLazy",
     opts = {
       hidden = false,
       respect_gitignore = true,

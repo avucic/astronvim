@@ -46,4 +46,20 @@ return {
       -- ...
     },
   },
+  {
+    "mg979/vim-visual-multi",
+    event = "VeryLazy",
+    dependencies = {
+      {
+        "AstroNvim/astrocore",
+        opts = function(_, opts)
+          local maps = opts.mappings
+          maps.n["<C-n>"] = "<Nop>"
+          maps.n["<C-p>"] = "<Nop>"
+          maps.n["<M-n>"] = { "<Plug>(VM-Add-Cursor-Down)" }
+          maps.n["<M-p>"] = { "<Plug>(VM-Add-Cursor-up)" }
+        end,
+      },
+    },
+  },
 }

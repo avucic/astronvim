@@ -2,6 +2,7 @@ return {
   {
     "avucic/workspace.nvim",
     dir = "~/Work/Neovim/workspace.nvim",
+    event = "VeryLazy",
     dependencies = {
       "nvim-telescope/telescope.nvim",
       {
@@ -18,6 +19,7 @@ return {
         workspaces = {
           { name = "PRICING_WALL-RUBY", path = "~/Work/pricingwall.com/dev/pricing_wall-ruby" },
           { name = "PRICING_WALL", path = "~/Work/pricingwall.com/dev/pricing_wall" },
+          { name = "PRICING_WALL-WEB", path = "~/Work/pricingwall.com/dev/pricing_wall/web" },
           { name = "DROPONGO", path = "~/Work/Dropongo/Development/dropongo" },
           { name = "DOTFILES", path = "~/dotfiles" },
           { name = "NVIM", path = "~/dotfiles/nvim/.config/nvim" },

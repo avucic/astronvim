@@ -22,6 +22,7 @@ maps.n["<C-q>"] = false
 -- maps.n["gd"] = false
 -- maps.n["gD"] = false
 maps.n["|"] = false
+-- maps.n["j"] = false
 
 maps.n["<c-q>"] =      { "<cmd>silent! cclose<cr><cmd>nohlsearch<cr><cmd>ToggleTermToggleAll<cr>" }
 maps.n["<esc>"] =      { "<cmd>nohlsearch<cr><cmd>lua require('notify').dismiss()<cr>" }
@@ -66,7 +67,7 @@ maps.n["<Leader>fx"] = { "<cmd>OpenFile<cr>", desc = "Open file in folder" }
 maps.n["<Leader>fX"] = { "<cmd>OpenFolderInFinder<cr>", desc = "Open folder" }
 maps.n["<leader>fw"] = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", desc = "Live grep", }
 maps.v["<leader>fw"] = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args({default_text = require('core.utils').get_visual_selection()})<CR>", desc = "Live grep", }
-maps.v["<leader>fR"] = { "<cmd>e %<CR>", desc = "Reload file", }
+maps.n["<leader>fR"] = { "<cmd>e %<CR>", desc = "Reload file", }
 maps.n["<Leader>fC"] = false
 maps.n["<Leader>fk"] = false
 
@@ -109,7 +110,7 @@ maps.n["<Leader>gr"] = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", desc = 
 maps.n["<Leader>gR"] = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", desc = "Reset buffer" }
 -- maps.n["<Leader>gO"] = { "<cmd>OpenInGHFile<cr>", desc = "Open current file in Github" }
 -- maps.n["<Leader>go"] = { "<cmd>OpenInGHRepo<cr>", desc = "Open page with line in Github" }
-maps.n["<Leader>gs"] = {
+maps.n["<Leader>gg"] = {
   "<cmd>lua _LAZYGIT_TOGGLE()<CR>",
   desc = "Git status",
 }
@@ -122,7 +123,6 @@ maps.v["<leader>gdl"] = { "<cmd>lua require('telescope').extensions.advanced_git
 maps.n["<Leader>gdb"] = { "<cmd>lua require('telescope').extensions.advanced_git_search.diff_branch_file()<cr>", desc = "Diff branch file" }
 maps.n["<Leader>gdf"] = { "<cmd>lua require('telescope').extensions.advanced_git_search.diff_commit_file()<cr>", desc = "Search file" }
 maps.n["<Leader>gds"] = { "<cmd>lua require('telescope').extensions.advanced_git_search.search_log_content()<cr>", desc = "Search log" }
-maps.n["<Leader>gg"] = false
 maps.n["<Leader>gt"] = false
 maps.n["<Leader>gS"] = false
 --

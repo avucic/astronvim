@@ -1,10 +1,19 @@
 -- Customize Treesitter
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.cedar = {
+  install_info = {
+    url = "~/Work/Neovim/tree-sitter-cedar",
+    files = { "src/parser.c" },
+  },
+  filetype = "cedar", -- if filetype does not agrees with parser name
+}
 
 ---@type LazySpec
 return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
+      require("ts_context_commentstring").setup {}
       -- add more things to the ensure_installed table protecting against community packs modifying it
       -- opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
       opts.ensure_installed = {
@@ -15,6 +24,7 @@ return {
         "scss",
         "bash",
         "cmake",
+        "cedar",
         -- "dockerfile",
         "hcl",
         "regex",
@@ -40,20 +50,6 @@ return {
         "kdl",
         -- add more arguments for adding more treesitter parsers
         -- })
-      }
-
-      opts.context_commentstring = {
-        enable = true,
-        -- enable_autocmd = false,
-        -- config = {
-        --   -- Languages that have a single comment style
-        --   typescript = "// %s",
-        --   css = "/* %s */",
-        --   scss = "/* %s */",
-        --   html = "<!-- %s -->",
-        --   svelte = "<!-- %s -->",
-        --   vue = "<!-- %s -->",
-        --   json = "",
       }
 
       opts.markid = { enable = true }
@@ -124,7 +120,10 @@ return {
       }
     end,
   },
-  { "David-Kunz/markid" },
+  {
+    "David-Kunz/markid",
+    event = "BufReadPost",
+  },
   {
     "nvim-treesitter/playground",
     cmd = {

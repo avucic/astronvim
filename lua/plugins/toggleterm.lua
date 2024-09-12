@@ -59,7 +59,7 @@ return {
         if term.direction ~= "float" then set_terminal_keymaps() end
       end
 
-      opts.on_open = function(term)
+      opts.on_open = function()
         -- vim.cmd("startinsert!")
       end
       -- open_mapping = [[\\]],
@@ -70,7 +70,6 @@ return {
       opts.insert_mappings = false
       opts.terminal_mappings = false
       opts.start_in_insert = false
-      opts.direction = default_direction
       opts.highlights = {
         -- border = "Normal",
         -- background = "Normal",

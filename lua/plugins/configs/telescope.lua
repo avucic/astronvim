@@ -10,15 +10,6 @@ return function(_, _)
     vim.fn.setreg("+", buf_select[1])
   end
 
-  local pick_window = function()
-    local picked_window_id = require("user.core.plugins.window_picker").pick()
-    if picked_window_id then
-      vim.api.nvim_set_current_win(picked_window_id)
-      local buf_select = state.get_selected_entry()
-      vim.cmd("edit " .. vim.fn.fnameescape(buf_select[1]))
-    end
-  end
-
   return {
     defaults = {
       preview = {
@@ -104,6 +95,11 @@ return function(_, _)
           -- ["<C-l>"] = actions.complete_tag,
           -- ["<C-a>"] = lga_actions.quote_prompt(),
           -- ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+          --
+          ["<C-k>"] = lga_actions.quote_prompt(),
+          ["<C-i>"] = lga_actions.quote_prompt { postfix = " --iglob " },
+          -- freeze the current list and start a fuzzy search in the frozen list
+          ["<C-space>"] = actions.to_fuzzy_refine,
         },
         n = {
           ["q"] = actions.close,
@@ -140,6 +136,9 @@ return function(_, _)
           --
           --   ["<PageUp>"] = actions.results_scrolling_up,
           --   ["<PageDown>"] = actions.results_scrolling_down,
+          --
+          ["<C-k>"] = lga_actions.quote_prompt(),
+          ["<C-i>"] = lga_actions.quote_prompt { postfix = " --iglob " },
         },
       },
     },

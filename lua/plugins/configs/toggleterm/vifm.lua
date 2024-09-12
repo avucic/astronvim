@@ -2,28 +2,51 @@ local Terminal = require("toggleterm.terminal").Terminal
 local Path = require "plenary.path"
 local tmp_path = "/tmp/nvim-vifm"
 
-function Rename(old, new)
-  local orig = vim.notify
-  vim.notify = function() end
-  local current_buf_name = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
-
-  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    local is_valid = vim.api.nvim_buf_is_valid(buf)
-    if is_valid then
-      local name = vim.api.nvim_buf_get_name(buf)
-
-      local listed = vim.bo[buf].buflisted
-      if listed then
-        if old == name then
-          vim.api.nvim_buf_set_name(buf, new)
-          vim.api.nvim_buf_call(buf, vim.cmd.edit)
-        end
-      end
+-- function Rename(old, new)
+--   local orig = vim.notify
+--   vim.notify = function() end
+--   -- local current_buf_name = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
+--
+--   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+--     local is_valid = vim.api.nvim_buf_is_valid(buf)
+--     if is_valid then
+--       local name = vim.api.nvim_buf_get_name(buf)
+--
+--       local listed = vim.bo[buf].buflisted
+--       if listed then
+--         if old == name then
+--           vim.api.nvim_buf_set_name(buf, new)
+--           vim.api.nvim_buf_call(buf, vim.cmd.edit)
+--         end
+--       end
+--     end
+--   end
+--
+--   vim.cmd [[BWnex]]
+--   vim.notify = orig
+-- end
+--
+function _DELETE_INVALID_BUFFERS()
+  function table.contains(table, element)
+    for _, value in pairs(table) do
+      if value == element then return true end
     end
+    return false
   end
 
-  vim.cmd [[BWnex]]
-  vim.notify = orig
+  local skip_types = { "local", "terminal", "nofile" }
+  local function is_closable(buf)
+    if table.contains(skip_types, vim.api.nvim_buf_get_option(buf, "buftype")) then return false end
+
+    return (
+      vim.api.nvim_buf_get_option(buf, "filetype") ~= ""
+      and vim.fn.filereadable(vim.fn.expand("#" .. buf .. "#2:p")) == 0 -- or vim.api.nvim_get_option_value("modified", { buf = buf })
+    )
+  end
+
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if is_closable(buf) then vim.api.nvim_buf_delete(buf, {}) end
+  end
 end
 
 function _VIFM_TOGGLE(dir_arg)
@@ -68,7 +91,9 @@ function _VIFM_TOGGLE(dir_arg)
       vim.cmd "startinsert!"
     end,
     on_close = function()
-      data = Path:new(tmp_path):read()
+      _DELETE_INVALID_BUFFERS()
+      -- vim.schedule(functionk) end)
+      local data = Path:new(tmp_path):read()
       if data ~= "" then vim.schedule(function() vim.cmd("e " .. data) end) end
     end,
   }

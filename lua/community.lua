@@ -34,14 +34,14 @@ return {
   { import = "astrocommunity.editing-support.treesj" },
   { import = "astrocommunity.editing-support.dial-nvim" },
   { import = "astrocommunity.split-and-window/windows-nvim" },
-  { import = "astrocommunity.debugging.nvim-bqf" },
+  { import = "astrocommunity.quickfix.nvim-bqf" },
   { import = "astrocommunity.motion.harpoon" },
   { import = "astrocommunity.utility.noice-nvim" },
   { import = "astrocommunity.indent.indent-blankline-nvim" },
-  { import = "astrocommunity.editing-support.multicursors-nvim" },
   { import = "astrocommunity.editing-support.nvim-treesitter-endwise" },
   { import = "astrocommunity.editing-support.yanky-nvim" },
   { import = "astrocommunity.note-taking.zk-nvim" },
+
   {
     "zk-org/zk-nvim",
     config = require("plugins.custom.zk").config,
@@ -87,40 +87,6 @@ return {
     build = function() require("go.install").update_all() end,
   },
 
-  {
-    "nvim-telescope/telescope-live-grep-args.nvim",
-    config = function()
-      local lga_actions = require "telescope-live-grep-args.actions"
-      local actions = require "telescope.actions"
-      local telescope = require "telescope"
-
-      -- first setup telescope
-      telescope.setup {
-        -- your config
-        extensions = {
-          live_grep_args = {
-            auto_quoting = true, -- enable/disable auto-quoting
-            -- define mappings, e.g.
-            mappings = { -- extend mappings
-              i = {
-                ["<C-k>"] = lga_actions.quote_prompt(),
-                ["<C-i>"] = lga_actions.quote_prompt { postfix = " --iglob " },
-                -- freeze the current list and start a fuzzy search in the frozen list
-                ["<C-space>"] = actions.to_fuzzy_refine,
-              },
-            },
-            -- ... also accepts theme settings, for example:
-            -- theme = "dropdown", -- use dropdown theme
-            -- theme = { }, -- use own theme spec
-            -- layout_config = { mirror=true }, -- mirror preview pane
-          },
-        },
-      }
-
-      -- then load the extension
-      -- telescope.load_extension "live_grep_args"
-    end,
-  },
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -323,44 +289,5 @@ return {
         v = { ["<Leader>rr"] = { "<cmd>SnipRun<cr>", desc = "Execute" } },
       }
     end,
-  },
-  {
-    "smoka7/multicursors.nvim",
-    keys = {
-      {
-        mode = { "n" },
-        "<Leader>m",
-        false,
-      },
-      {
-        mode = { "v" },
-        "<Leader>m",
-        false,
-      },
-      {
-        mode = { "n" },
-        "<M-n>",
-        "<cmd>MCunderCursor<cr>",
-        desc = "Create a selection for selected text or word under the cursor",
-      },
-      {
-        mode = { "v", "n" },
-        "<c-n>",
-        "<cmd>MCstart<cr>",
-        desc = "Create a selection for selected text or word under the cursor",
-      },
-      {
-        mode = { "n" },
-        "<M-r>",
-        "<cmd>MCpattern<cr>",
-        desc = "Create a selection for selected text or word under the cursor",
-      },
-      {
-        mode = { "v" },
-        "<M-r>",
-        "<cmd>MCvisualPattern<cr>",
-        desc = "Create a selection for selected text or word under the cursor",
-      },
-    },
   },
 }

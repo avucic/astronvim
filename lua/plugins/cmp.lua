@@ -15,8 +15,8 @@ return {
     event = { "User AstroFile" },
     opts = function(_, opts)
       local cmp = require "cmp"
-      require("luasnip.loaders.from_vscode").lazy_load { paths = { "~/.vsnip" } }
       require "codeium"
+      require("luasnip.loaders.from_vscode").lazy_load { paths = { "~/.vsnip" } }
       require "crates"
 
       cmp.setup.cmdline("/", {
