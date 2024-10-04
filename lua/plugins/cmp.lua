@@ -15,9 +15,9 @@ return {
     event = { "User AstroFile" },
     opts = function(_, opts)
       local cmp = require "cmp"
-      require "codeium"
-      require("luasnip.loaders.from_vscode").lazy_load { paths = { "~/.vsnip" } }
       require "crates"
+      require "codeium"
+      require("luasnip.loaders.from_vscode").lazy_load { paths = { "~/.config/nvim/vsnip" } }
 
       cmp.setup.cmdline("/", {
         mapping = cmp.mapping.preset.cmdline(),

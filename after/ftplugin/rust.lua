@@ -1,15 +1,11 @@
-local astrocore = require "astrocore"
-local mappings = astrocore.config.mappings
-if mappings == nil then return end
+local bufnr = vim.api.nvim_get_current_buf()
 
-mappings.n["<Leader>mK"] = { "<cmd>RustLsp openDocs<cr>", desc = "Open docs" }
-mappings.n["<Leader>me"] = { "<cmd>RustLsp explainError<cr>", desc = "Explain error" }
-mappings.n["<Leader>mc"] = { "<cmd>RustLsp openCargo<cr>", desc = "Open cargo" }
-mappings.n["<Leader>mx"] = { "<cmd>RustLsp expandMacro<cr>", desc = "Expand macro" }
-mappings.v["<Leader>mo"] = { "diOption<<esc>pa><esc>", desc = "Add option" }
-mappings.v["<Leader>mO"] = { "diOption<<esc>pa><esc>", desc = "Remove option" }
-mappings.v["<Leader>mr"] = { "diResult<<esc>pa><esc>", desc = "Add option" }
-mappings.v["<Leader>mR"] = { "diResult<<esc>pa><esc>", desc = "Remove option" }
-mappings.v["<Leader>ms"] = { "diSome(<esc>pa)<esc>", desc = "Add some" }
-
-astrocore.set_mappings(mappings, {})
+vim.keymap.set("n", "<Leader>mK", "<cmd>RustLsp openDocs<cr>", { desc = "Open docs", buffer = bufnr })
+vim.keymap.set("n", "<Leader>me", "<cmd>RustLsp explainError<cr>", { desc = "Explain error", buffer = bufnr })
+vim.keymap.set("n", "<Leader>mc", "<cmd>RustLsp openCargo<cr>", { desc = "Open cargo", buffer = bufnr })
+vim.keymap.set("n", "<Leader>mx", "<cmd>RustLsp expandMacro<cr>", { desc = "Expand macro", buffer = bufnr })
+vim.keymap.set("v", "<Leader>mo", "diOption<<esc>pa><esc>", { desc = "Add option", buffer = bufnr })
+vim.keymap.set("v", "<Leader>mO", "diOption<<esc>pa><esc>", { desc = "Remove option", buffer = bufnr })
+vim.keymap.set("v", "<Leader>mr", "diResult<<esc>pa><esc>", { desc = "Add option", buffer = bufnr })
+vim.keymap.set("v", "<Leader>mR", "diResult<<esc>pa><esc>", { desc = "Remove option", buffer = bufnr })
+vim.keymap.set("v", "<Leader>ms", "diSome(<esc>pa)<esc>", { desc = "Add some", buffer = bufnr })
