@@ -61,6 +61,16 @@ return {
     end,
     cmd = { "Glance" },
   },
+  {
+    "dmmulroy/tsc.nvim",
+    cmd = { "TSC" },
+    config = function()
+      require("tsc").setup {
+        run_as_monorepo = true,
+        use_trouble_qflist = false,
+      }
+    end,
+  },
 
   -- {
   --   "kosayoda/nvim-lightbulb",

@@ -104,6 +104,17 @@ return {
           target = "/lib/%1.rake",
           context = "spec",
         },
+        {
+          pattern = "(.*).tsx",
+          target = "%1.test.tsx",
+          context = "spec",
+        },
+
+        {
+          pattern = "(.*).test.tsx",
+          target = "%1.tsx",
+          context = "file",
+        },
       },
     },
   },

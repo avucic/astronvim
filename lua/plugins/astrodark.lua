@@ -220,50 +220,50 @@ return {
             -- hl["Headline5"] = { fg = "#E9B674", bg = "#423D39", bold = false }
             -- hl["Headline6"] = { fg = "#C17242", bg = "#3F3531", bold = false }
 
-            hl["Headline1"] = { fg = "#E191E3", bg = "NONE", bold = false }
-            hl["Headline2"] = { fg = "#519ab8", bg = "NONE", bold = false }
-            hl["Headline3"] = { fg = "#9F97DB", bg = "NONE", bold = false }
-            hl["Headline4"] = { fg = "#8DB45D", bg = "NONE", bold = false }
-            hl["Headline5"] = { fg = "#E9B674", bg = "NONE", bold = false }
-            hl["Headline6"] = { fg = "#C17242", bg = "NONE", bold = false }
-
-            hl["Quote"] = { italic = true }
-            hl["Dash"] = { fg = C.ui.selection, bold = true }
-            hl["CodeBlock"] = { bg = C.bg }
-            -- hl["@MarkdownHeaderMarkerH1"] = { fg = C.dark_orange }
+            -- hl["Headline1"] = { fg = "#E191E3", bg = "NONE", bold = false }
+            -- hl["Headline2"] = { fg = "#519ab8", bg = "NONE", bold = false }
+            -- hl["Headline3"] = { fg = "#9F97DB", bg = "NONE", bold = false }
+            -- hl["Headline4"] = { fg = "#8DB45D", bg = "NONE", bold = false }
+            -- hl["Headline5"] = { fg = "#E9B674", bg = "NONE", bold = false }
+            -- hl["Headline6"] = { fg = "#C17242", bg = "NONE", bold = false }
             --
-            -- hl["@h2"] = { fg = C.ui.purple }
-            -- hl["@MarkdownHeaderMarkerH2"] = { fg = C.ui.purple }
-            --
-            -- hl["@h3"] = { fg = C.light_purple }
-            -- hl["@MarkdownHeaderMarkerH3"] = { fg = C.icon.pkg }
-            --
-            -- hl["@h4"] = { fg = C.syntax.cyan }
-            -- hl["@MarkdownHeaderMarkerH4"] = { fg = C.syntax.cyan }
-            --
-            -- hl["@h5"] = { fg = C.syntax.yellow }
-            -- hl["@MarkdownHeaderMarkerH5"] = { fg = C.syntax.yellow }
-            --
-            -- hl["@h6"] = { fg = C.ui.orange }
-            -- hl["@MarkdownHeaderMarkerH6"] = { fg = C.ui.orange }
-            --
-            -- hl["@text.reference"] = { fg = C.ui.blue }
-            -- hl["@text.emphasis"].fg = C.white
-            -- hl["@text.strong"].fg = C.white
-            -- hl["@punctuation.delimiter"] = { fg = C.syntax.yellow }
-            --
-            -- hl["@MarkdownBlockQuote"] = { fg = C.surface2, italic = true }
-            hl["@MarkdownMeta"] = { link = "Comment" }
-            hl["@MarkdownEmphasis"] = { fg = C.ui.text }
-            hl["@MarkdownStrongEmphasis"] = { fg = "#cccccc" }
-            hl["@MarkdownStrikeThrough"] = { fg = C.ui.text }
-            hl["@MarkdownInlineBlockCode"] = { fg = C.syntax.green, bg = C.black }
-            -- hl["@MarkdownCodeBlockBG"] = { bg = C.black }
-            hl["@MarkdownTableHeaderCell"] = { link = "BufferInactiveMod" }
-            hl["@MarkdownTable"] = { link = "BufferVisibleTarget" }
-            hl["@MarkdownListItemMarker"] = { link = "@comment" }
-            hl["@MarkdownTag"] = { link = "@constant" }
-            hl["@MarkdownTagItem"] = { link = "@constant" }
+            -- hl["Quote"] = { italic = true }
+            -- hl["Dash"] = { fg = C.ui.selection, bold = true }
+            -- hl["CodeBlock"] = { bg = C.bg }
+            -- -- hl["@MarkdownHeaderMarkerH1"] = { fg = C.dark_orange }
+            -- --
+            -- -- hl["@h2"] = { fg = C.ui.purple }
+            -- -- hl["@MarkdownHeaderMarkerH2"] = { fg = C.ui.purple }
+            -- --
+            -- -- hl["@h3"] = { fg = C.light_purple }
+            -- -- hl["@MarkdownHeaderMarkerH3"] = { fg = C.icon.pkg }
+            -- --
+            -- -- hl["@h4"] = { fg = C.syntax.cyan }
+            -- -- hl["@MarkdownHeaderMarkerH4"] = { fg = C.syntax.cyan }
+            -- --
+            -- -- hl["@h5"] = { fg = C.syntax.yellow }
+            -- -- hl["@MarkdownHeaderMarkerH5"] = { fg = C.syntax.yellow }
+            -- --
+            -- -- hl["@h6"] = { fg = C.ui.orange }
+            -- -- hl["@MarkdownHeaderMarkerH6"] = { fg = C.ui.orange }
+            -- --
+            -- -- hl["@text.reference"] = { fg = C.ui.blue }
+            -- -- hl["@text.emphasis"].fg = C.white
+            -- -- hl["@text.strong"].fg = C.white
+            -- -- hl["@punctuation.delimiter"] = { fg = C.syntax.yellow }
+            -- --
+            -- -- hl["@MarkdownBlockQuote"] = { fg = C.surface2, italic = true }
+            -- hl["@MarkdownMeta"] = { link = "Comment" }
+            -- hl["@MarkdownEmphasis"] = { fg = C.ui.text }
+            -- hl["@MarkdownStrongEmphasis"] = { fg = "#cccccc" }
+            -- hl["@MarkdownStrikeThrough"] = { fg = C.ui.text }
+            -- hl["@MarkdownInlineBlockCode"] = { fg = C.syntax.green, bg = C.black }
+            -- -- hl["@MarkdownCodeBlockBG"] = { bg = C.black }
+            -- hl["@MarkdownTableHeaderCell"] = { link = "BufferInactiveMod" }
+            -- hl["@MarkdownTable"] = { link = "BufferVisibleTarget" }
+            -- hl["@MarkdownListItemMarker"] = { link = "@comment" }
+            -- hl["@MarkdownTag"] = { link = "@constant" }
+            -- hl["@MarkdownTagItem"] = { link = "@constant" }
             -- hl["@MarkdownHorizontalLine"] = { fg = C.syntax.red, bg = C.syntax.mute }
 
             hl["SpellBad"] = { sp = "red", undercurl = true }

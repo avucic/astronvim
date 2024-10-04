@@ -57,8 +57,8 @@ maps.n["<c-w>tq"] = { "<cmd>tabclose<cr>", desc = "Close tab" }
 
 -- +Files
 maps.n["<Leader>fn"] = { "<cmd>enew<cr>", desc = "New file" }
-maps.n["<Leader>fe"] = { "<cmd>lua _VIFM_TOGGLE()<cr>", desc = "Explorer from current dir" }
-maps.n["<Leader>fE"] = { "<cmd>lua _VIFM_TOGGLE(vim.fn.getcwd())<cr>", desc = "Explorer from current dir" }
+-- maps.n["<Leader>fe"] = { "<cmd>lua _VIFM_TOGGLE()<cr>", desc = "Explorer from current dir" }
+-- maps.n["<Leader>fE"] = { "<cmd>lua _VIFM_TOGGLE(vim.fn.getcwd())<cr>", desc = "Explorer from current dir" }
 maps.n["<Leader>fd"] = { "<cmd>lua require('telescope').extensions.dir.live_grep()<CR>", desc = "Find dir" }
 maps.n["<Leader>f?"] = { "<cmd>lua require('telescope.builtin').search_history()<CR>", desc = "History" }
 maps.n["<Leader>fy"] = { "<cmd>let @*=expand('%')<cr>", desc = "Yank file path" }

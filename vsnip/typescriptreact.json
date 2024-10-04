@@ -1,0 +1,37 @@
+{
+  "CSF 3.0: Setup with Render (React TS)": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "stb",
+    "body": [
+      "import { Meta, StoryObj } from '@storybook/react';",
+      "",
+      "import ${1:${TM_FILENAME_BASE/.(?:story|stories).*//gi} from './${1:${TM_FILENAME_BASE/.(?:story|stories).*//gi}';",
+      "",
+      "const meta = {",
+      "\tcomponent: ${1:${TM_FILENAME_BASE/.(?:story|stories).*//gi}",
+      "} satisfies Meta<typeof ${1:${TM_FILENAME_BASE/.(?:story|stories).*//gi}>",
+      "",
+      "export default meta;",
+      "",
+      "type Story = StoryObj<typeof meta>;",
+      "",
+      "export const Default: Story = {",
+      "\targs: {",
+      "\t},",
+      "\tparameters: {",
+      "\t\tlayout: 'fullscreen'",
+      "\t}",
+      "};"
+    ],
+    "description": "Scaffold a Story"
+  },
+  "useEffect": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "useE",
+    "body": [
+      "useEffect(() => {",
+      "\t${1}",
+      "}, [${2}]);"
+    ]
+  }
+}

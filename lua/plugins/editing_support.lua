@@ -20,35 +20,18 @@ return {
     },
   },
   {
-    "chrisgrieser/nvim-spider",
-    event = { "User AstroFile" },
-    -- opts = {
-    --   skipInsignificantPunctuation = false,
-    -- },
-    keys = {
-      {
-        "e",
-        "<cmd>lua require('spider').motion('e')<CR>",
-        mode = { "n", "o", "x" },
-      },
-
-      {
-        "w",
-        "<cmd>lua require('spider').motion('w')<CR>",
-        mode = { "n", "o", "x" },
-      },
-
-      {
-        "b",
-        "<cmd>lua require('spider').motion('b')<CR>",
-        mode = { "n", "o", "x" },
-      },
-      -- ...
-    },
-  },
-  {
     "mg979/vim-visual-multi",
     event = "VeryLazy",
+    init = function()
+      vim.cmd [[
+        let g:VM_mouse_mappings = 1
+        " let g:VM_maps = {}
+        " let g:VM_maps["Add Cursor At Pos"]            = '<c-c>'
+        " let g:VM_maps['Visual Add']                   = '<c-c>'
+        " let g:VM_maps["Select All"]                   = '<c-a>'
+        " let g:VM_maps['Visual All']                   = '<c-a>'
+      ]]
+    end,
     dependencies = {
       {
         "AstroNvim/astrocore",

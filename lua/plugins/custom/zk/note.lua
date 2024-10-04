@@ -262,6 +262,22 @@ function M.open_notes()
   local options = {
     sort = { "modified" },
     preview_title = "File preview",
+    attach_mappings = function(prompt_bufnr, map)
+      local select_note = function()
+        local entry = state.get_selected_entry()
+
+        if entry == nil then
+          print "No selection"
+        else
+          actions.select_default()
+        end
+        return false
+      end
+
+      map("i", "<CR>", select_note)
+      map("n", "<CR>", select_note)
+      return true
+    end,
   }
   zk.edit({ path = path, sort = { "modified" } }, { picker = "telescope", telescope = options })
 end

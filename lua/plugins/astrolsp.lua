@@ -5,6 +5,9 @@
 --
 local bundle_gemfile = os.getenv "BUNDLE_GEMFILE" or "~/.config/nvim/Gemfile"
 
+local astrocore = require "astrocore"
+local mappings = astrocore.config.mappings
+
 ---@type LazySpec
 return {
   "AstroNvim/astrolsp",
@@ -154,7 +157,9 @@ return {
     on_attach = function(client, bufnr)
       -- this would disable semanticTokensProvider for all clients
       -- client.server_capabilities.semanticTokensProvider = nil
-      --
+      if client.name == "vtsls" then
+        vim.keymap.set("n", "<leader>lwt", "<cmd>TSC<cr>", { desc = "Run tsc errors check", buffer = bufnr })
+      end
     end,
   },
 }

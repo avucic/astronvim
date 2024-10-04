@@ -35,8 +35,8 @@ return {
           maps.n["<Leader>otv"] =
             { "<Cmd>ToggleTerm size=80 direction=vertical<CR>", desc = "ToggleTerm vertical split" }
 
-          maps.n["\\"] = "<Nop>"
-          maps.n["\\\\"] = { "<cmd>ToggleTermToggleAll<cr>" }
+          -- maps.n["\\"] = "<Nop>"
+          -- maps.n["\\\\"] = { "<cmd>ToggleTermToggleAll<cr>" }
         end,
       },
     },

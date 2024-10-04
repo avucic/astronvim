@@ -19,6 +19,9 @@ return {
       },
     },
     config = function()
+      require "plugins.configs.dap.ruby"
+      require "plugins.configs.dap.javascript"
+
       require("dap.ext.vscode").load_launchjs(nil, {
         ["ruby"] = { "rails", "ruby" },
         ["pwa-node"] = js_based_languages,
@@ -26,8 +29,6 @@ return {
         ["chrome"] = js_based_languages,
         ["pwa-chrome"] = js_based_languages,
       })
-      require "plugins.configs.dap.ruby"(dap)
-      require "plugins.configs.dap.javascript"(dap)
     end,
   },
 }

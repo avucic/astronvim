@@ -4,15 +4,15 @@
 -- map("c", { "comment" }, "Comment")
 --
 --
-local astrocore = require "astrocore"
+
 local overseer = require "overseer"
-local mappings = astrocore.config.mappings
-if mappings == nil then return end
-
-mappings.n["<Leader>mtt"] =
-  { function() overseer.run_action(nil, "rspec - current spec") end, desc = "Run current spec" }
-
-astrocore.set_mappings(mappings, {})
+local bufnr = vim.api.nvim_get_current_buf()
+vim.keymap.set(
+  "n",
+  "<Leader>mtt",
+  function() overseer.run_action(nil, "rspec - current spec") end,
+  { desc = "Run current spec", buffer = bufnr }
+)
 
 -- local wk = require("which-key")
 --

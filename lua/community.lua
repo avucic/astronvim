@@ -14,7 +14,7 @@ return {
   { import = "astrocommunity.pack.html-css" },
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.pack.tailwindcss" },
-  { import = "astrocommunity.pack.typescript-all-in-one" },
+  { import = "astrocommunity.pack.typescript" },
 
   -- TODO:
   -- 1.fix telescope-nvchad-theme
@@ -23,24 +23,95 @@ return {
   -- { import = "astrocommunity.recipes.telescope-nvchad-theme" },
   { import = "astrocommunity.code-runner.overseer-nvim" },
   { import = "astrocommunity.code-runner.sniprun" },
-  { import = "astrocommunity.utility.telescope-live-grep-args-nvim" },
-  { import = "astrocommunity.utility.nvim-toggler" },
-  { import = "astrocommunity.motion.flash-nvim" },
-  { import = "astrocommunity.motion.nvim-surround" },
-  { import = "astrocommunity.motion.before-nvim" },
-  { import = "astrocommunity.motion.mini-move" },
-  { import = "astrocommunity.editing-support.true-zen-nvim" },
+  { import = "astrocommunity.editing-support.dial-nvim" },
+  { import = "astrocommunity.editing-support.nvim-treesitter-endwise" },
   { import = "astrocommunity.editing-support.text-case-nvim" },
   { import = "astrocommunity.editing-support.treesj" },
-  { import = "astrocommunity.editing-support.dial-nvim" },
-  { import = "astrocommunity.split-and-window/windows-nvim" },
-  { import = "astrocommunity.quickfix.nvim-bqf" },
-  { import = "astrocommunity.motion.harpoon" },
-  { import = "astrocommunity.utility.noice-nvim" },
-  { import = "astrocommunity.indent.indent-blankline-nvim" },
-  { import = "astrocommunity.editing-support.nvim-treesitter-endwise" },
+  { import = "astrocommunity.editing-support.true-zen-nvim" },
   { import = "astrocommunity.editing-support.yanky-nvim" },
+  { import = "astrocommunity.indent.indent-blankline-nvim" },
+  { import = "astrocommunity.motion.before-nvim" },
+  { import = "astrocommunity.motion.flash-nvim" },
+  { import = "astrocommunity.motion.harpoon" },
+  { import = "astrocommunity.motion.mini-move" },
+  { import = "astrocommunity.motion.nvim-surround" },
+  { import = "astrocommunity.motion.nvim-spider" },
   { import = "astrocommunity.note-taking.zk-nvim" },
+  { import = "astrocommunity.quickfix.nvim-bqf" },
+  { import = "astrocommunity.split-and-window/windows-nvim" },
+  { import = "astrocommunity.utility.noice-nvim" },
+  { import = "astrocommunity.utility.nvim-toggler" },
+  { import = "astrocommunity.utility.telescope-live-grep-args-nvim" },
+  { import = "astrocommunity.file-explorer.oil-nvim" },
+  -- { import = "astrocommunity.markdown-and-latex.markview-nvim" },
+  { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
+  { import = "astrocommunity.markdown-and-latex.markdown-preview-nvim" },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    config = function()
+      vim.cmd [[
+        hi RenderMarkdownH1Bg guifg=#828bb8 guibg=#202333
+        hi RenderMarkdownH2Bg guifg=#41a6b5 guibg=#17242B
+        hi RenderMarkdownH3Bg guifg=#b36900 guibg=#282427
+        hi RenderMarkdownH4Bg guifg=#4fd6be guibg=#17242B
+        hi RenderMarkdownH5Bg guifg=#82aaff guibg=#202333
+        hi RenderMarkdownH6Bg guifg=#636da6 guibg=#202333
+
+        hi RenderMarkdownH1 guifg=#828bb8 guibg=#202333
+        hi RenderMarkdownH2 guifg=#41a6b5 guibg=#17242B
+        hi RenderMarkdownH3 guifg=#b36900 guibg=#282427
+        hi RenderMarkdownH4 guifg=#4fd6be guibg=#17242B
+        hi RenderMarkdownH5 guifg=#82aaff guibg=#202333
+        hi RenderMarkdownH6 guifg=#636da6 guibg=#202333
+      ]]
+    end,
+  },
+  {
+    "stevearc/oil.nvim",
+    dependencies = {
+      {
+        "AstroNvim/astrocore",
+        opts = function(_, opts)
+          local maps = opts.mappings
+          maps.n["<Leader>fe"] = { "<cmd>lua require('oil').toggle_float()<cr>", desc = "Oil file explorer" }
+          maps.n["<Leader>fE"] =
+            { "<cmd>lua require('oil').toggle_float(vim.fn.getcwd())<cr>", desc = "Oil file explorer" }
+          maps.n["<Leader>O"] = nil
+        end,
+      },
+    },
+    opts = function(_, opts)
+      opts.default_file_explorer = "oil"
+      opts.keymaps = {
+        ["<C-w>v"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
+        ["<C-w>s"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
+        ["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
+        ["<C-p>"] = false,
+        ["<C-h>"] = false,
+        ["<C-s>"] = false,
+        ["<C-v>"] = false,
+        -- ["h"] = { "actions.parent", desc = "Parent" },
+        -- ["l"] = { "actions.select", desc = "Select" },
+        ["R"] = { "actions.refresh", desc = "Refresh" },
+        ["q"] = { "actions.close", desc = "Close" },
+        ["P"] = { "actions.preview", desc = "Preview" },
+      }
+
+      opts.float = {
+        padding = 20,
+        max_width = 0,
+        max_height = 0,
+        border = "rounded",
+        win_options = {
+          winblend = 0,
+          winhighlight = "NormalFloat:Telescope",
+        },
+        -- optionally override the oil buffers window title with custom function: fun(winid: integer): string
+        -- preview_split: Split direction: "auto", "left", "right", "above", "below".
+        preview_split = "auto",
+      }
+    end,
+  },
 
   {
     "zk-org/zk-nvim",
@@ -100,9 +171,9 @@ return {
           maps.o["gV"] = maps.o["S"]
           maps.n["gV"] = maps.n["S"]
 
-          maps.x["S"] = nil
-          maps.o["S"] = nil
-          maps.n["S"] = nil
+          -- maps.x["S"] = nil
+          -- maps.o["S"] = nil
+          -- maps.n["S"] = nil
         end,
       },
     },
