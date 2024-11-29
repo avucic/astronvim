@@ -33,5 +33,18 @@
       "\t${1}",
       "}, [${2}]);"
     ]
+  },
+  "React component": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "rc",
+    "body": [
+      "import React from 'react'",
+      "",
+      "export function ${1:${TM_FILENAME_BASE}}() {",
+      "\treturn (",
+      "\t\t<div>${0:${TM_FILENAME_BASE}}</div>",
+      "\t)",
+      "}"
+    ]
   }
 }

@@ -15,12 +15,14 @@ return {
   { import = "astrocommunity.pack.markdown" },
   { import = "astrocommunity.pack.tailwindcss" },
   { import = "astrocommunity.pack.typescript" },
+  { import = "astrocommunity.pack.full-dadbod" },
 
   -- TODO:
   -- 1.fix telescope-nvchad-theme
   -- 2. lazy load some plugins like dial, leap, harpoon
 
   -- { import = "astrocommunity.recipes.telescope-nvchad-theme" },
+  -- { import = "astrocommunity.markdown-and-latex.markview-nvim" },
   { import = "astrocommunity.code-runner.overseer-nvim" },
   { import = "astrocommunity.code-runner.sniprun" },
   { import = "astrocommunity.editing-support.dial-nvim" },
@@ -29,23 +31,38 @@ return {
   { import = "astrocommunity.editing-support.treesj" },
   { import = "astrocommunity.editing-support.true-zen-nvim" },
   { import = "astrocommunity.editing-support.yanky-nvim" },
+  { import = "astrocommunity.file-explorer.oil-nvim" },
   { import = "astrocommunity.indent.indent-blankline-nvim" },
+  { import = "astrocommunity.markdown-and-latex.markdown-preview-nvim" },
+  { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
   { import = "astrocommunity.motion.before-nvim" },
   { import = "astrocommunity.motion.flash-nvim" },
   { import = "astrocommunity.motion.harpoon" },
   { import = "astrocommunity.motion.mini-move" },
-  { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.motion.nvim-spider" },
+  { import = "astrocommunity.motion.nvim-surround" },
   { import = "astrocommunity.note-taking.zk-nvim" },
   { import = "astrocommunity.quickfix.nvim-bqf" },
   { import = "astrocommunity.split-and-window/windows-nvim" },
   { import = "astrocommunity.utility.noice-nvim" },
   { import = "astrocommunity.utility.nvim-toggler" },
   { import = "astrocommunity.utility.telescope-live-grep-args-nvim" },
-  { import = "astrocommunity.file-explorer.oil-nvim" },
-  -- { import = "astrocommunity.markdown-and-latex.markview-nvim" },
-  { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
-  { import = "astrocommunity.markdown-and-latex.markdown-preview-nvim" },
+
+  {
+    "kristijanhusak/vim-dadbod-ui",
+    dependencies = {
+      "kristijanhusak/vim-dadbod-completion",
+      {
+        "AstroNvim/astrocore",
+        opts = function(_, opts)
+          local maps = opts.mappings
+          maps.n["<Leader>od"] = { desc = "DB" }
+          maps.n["<Leader>odt"] = { "<cmd>DBUIToggle<cr>", desc = "Toggle DB Connection" }
+        end,
+      },
+    },
+  },
+
   {
     "MeanderingProgrammer/render-markdown.nvim",
     config = function()
@@ -74,8 +91,9 @@ return {
         opts = function(_, opts)
           local maps = opts.mappings
           maps.n["<Leader>fe"] = { "<cmd>lua require('oil').toggle_float()<cr>", desc = "Oil file explorer" }
-          maps.n["<Leader>fE"] =
-            { "<cmd>lua require('oil').toggle_float(vim.fn.getcwd())<cr>", desc = "Oil file explorer" }
+          -- maps.n["<Leader>fE"] =
+          --   { "<cmd>lua require('oil').toggle_float(vim.fn.getcwd())<cr>", desc = "Oil file explorer" }
+          maps.n["<Leader>fE"] = { "<cmd>OilBookmarks<cr>", desc = "Oil explorer bookmarks" }
           maps.n["<Leader>O"] = nil
         end,
       },
@@ -90,11 +108,20 @@ return {
         ["<C-h>"] = false,
         ["<C-s>"] = false,
         ["<C-v>"] = false,
+        ["."] = false,
         -- ["h"] = { "actions.parent", desc = "Parent" },
         -- ["l"] = { "actions.select", desc = "Select" },
         ["R"] = { "actions.refresh", desc = "Refresh" },
         ["q"] = { "actions.close", desc = "Close" },
         ["P"] = { "actions.preview", desc = "Preview" },
+        ["mm"] = {
+          function()
+            local oil = require "oil"
+            local dir = oil.get_current_dir()
+            require("plugins.custom.oil_explorer_bookmarks").create_bookmark(dir)
+          end,
+          desc = "Bookmark",
+        },
       }
 
       opts.float = {

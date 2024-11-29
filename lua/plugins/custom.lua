@@ -51,4 +51,11 @@ return {
     dir = "./custom/apply_macro_to_visual_selection",
     config = function() require("plugins.custom.apply_macro_to_visual_selection").setup() end,
   },
+  {
+    "avucic/oil_explorer_bookmarks",
+    lazy = false,
+    dir = "./custom/oil_explorer_bookmarks",
+    cmd = { "OilBookmarks" },
+    config = function() require("plugins.custom.oil_explorer_bookmarks").setup() end,
+  },
 }
