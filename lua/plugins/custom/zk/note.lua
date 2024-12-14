@@ -9,15 +9,59 @@ local zk = require "zk"
 
 local entry_display = require "telescope.pickers.entry_display"
 
+local split_string = function(s, delimiter)
+  delimiter = delimiter or "%s"
+  local t = {}
+  local i = 1
+  for str in string.gmatch(s, "([^" .. delimiter .. "]+)") do
+    t[i] = str
+    i = i + 1
+  end
+  return t
+end
+
+-- local icon_and_prefix = function(path)
+--   local icon
+--   local prefix
+--   local color
+--   if path:match "daily_notes" then
+--     prefix = "DN"
+--     icon = ""
+--     color = "DailyNote"
+--   elseif path:match "references" then
+--     prefix = "RN"
+--     icon = ""
+--     color = "ReferenceNote"
+--   elseif path:match "literature_notes" then
+--     prefix = "LN"
+--     icon = ""
+--     color = "Number"
+--   elseif path:match "slip" then
+--     prefix = "SB"
+--     icon = ""
+--     color = "SlipNote"
+--   elseif path:match "journal/daily" then
+--     prefix = "DN"
+--     icon = ""
+--     color = "JournalNote"
+--   elseif path:match "projects" then
+--     prefix = "PN"
+--     icon = ""
+--     color = "ProjectNote"
+--   end
+--   return { icon = icon, prefix = prefix, color = color }
+-- end
+
 -- https://github.com/nvim-telescope/telescope.nvim/issues/313
 local function create_note_entry_maker(opts)
   local displayer = entry_display.create {
-    separator = "▏",
+    separator = " | ",
     items = {
       -- slighltly increased width
       -- { width = 3 },
       -- { width = 3 },
       -- { width = 48 },
+      { remaining = true },
       { remaining = true },
     },
   }
@@ -26,31 +70,63 @@ local function create_note_entry_maker(opts)
     -- local icnprx = icon_and_prefix(entry.path)
     local title = entry.ordinal
 
+    -- local prefix = string.gmatch(entry.value.path, "([%w-_]+)/")()
+    --
+    -- if prefix then title = prefix .. ": " .. title end
+    -- entry.prefix = prefix
+
     -- local icon_info = {
     --   table.concat { icnprx.icon },
     --   icnprx.color,
     -- }
     --
-    -- local prefix_info = {
-    --   table.concat { icnprx.prefix },
-    --   icnprx.color,
-    -- }
+    local prefix_info
+    local segments = split_string(title, ":")
+    local prefix
+
+    if segments[2] then
+      title = segments[2]
+      prefix = segments[1]
+    end
+
+    if prefix then
+      prefix_info = {
+        table.concat { prefix },
+        "ProjectNote",
+      }
+    else
+      prefix_info = prefix
+    end
 
     return displayer {
       -- icon_info,
-      -- prefix_info,
+      prefix_info,
       title,
     }
   end
 
   return function(entry)
     local title = entry.title
+    local ordinal = title
+
+    local prefix = string.gmatch(entry.path, "([%w-_]+)/")()
+    if prefix then ordinal = prefix .. ":" .. entry.title end
 
     return {
       path = entry.absPath,
       display = make_display,
-      ordinal = title,
+      ordinal = ordinal,
       value = entry,
+      -- ordinal = entry.title,
+      -- display = make_display,
+      --
+      -- filename = filename,
+      -- type = entry.type,
+      -- lnum = entry.lnum,
+      -- col = entry.col,
+      -- text = entry.title,
+      -- start = entry.start,
+      -- finish = entry.finish,
     }
   end
 end
@@ -125,19 +201,19 @@ end
 function M.grep_notes(opts)
   opts = opts or {}
 
-  local dir = vim.loop.cwd()
+  local dir = get_zk_notebook_dir()
   local collection = {}
   local list_opts = { select = { "title", "path", "absPath" } }
 
   require("zk.api").list(dir, list_opts, function(_, notes)
     for _, note in ipairs(notes) do
-      local prefix = string.gmatch(note.path, "([%w-_]+)/")()
-      local title
-      if prefix then
-        title = prefix .. ": " .. note.title
-      else
-        title = note.title
-      end
+      -- local prefix = string.gmatch(note.path, "([%w-_]+)/")()
+      local title = note.title
+      -- if prefix then
+      --   title = prefix .. ": " .. note.title
+      -- else
+      --   title = note.title
+      -- end
       collection[note.absPath] = title
     end
   end)
