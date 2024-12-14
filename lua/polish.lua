@@ -30,3 +30,4 @@ local ft = require "Comment.ft"
 ft.set("cedar", { "//%s" })
 
 vim.opt.conceallevel = 3
+vim.opt.foldenable = false

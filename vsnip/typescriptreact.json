@@ -40,7 +40,11 @@
     "body": [
       "import React from 'react'",
       "",
-      "export function ${1:${TM_FILENAME_BASE}}() {",
+      "type ${1:${TM_FILENAME_BASE}}Props = {",
+      "",
+      "}",
+      "",
+      "export function ${1:${TM_FILENAME_BASE}}(props:${1:${TM_FILENAME_BASE}}Props) {",
       "\treturn (",
       "\t\t<div>${0:${TM_FILENAME_BASE}}</div>",
       "\t)",

@@ -108,7 +108,7 @@ function M.open_bookmarks(opts)
 
   pickers
     .new(opts, {
-      prompt_title = "bookmarks",
+      prompt_title = "Bookmarks",
       finder = finders.new_table {
         results = results,
         -- entry_maker = function(path)

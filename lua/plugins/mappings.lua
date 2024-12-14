@@ -153,26 +153,32 @@ maps.n["<Leader>jr"] = { "<cmd>lua require('telescope.builtin').lsp_references()
 -- +Notes
 maps.n["<Leader>n"] = { false, desc = "Notes" }
 maps.n["<Leader>nn"] = false
-maps.n["<Leader>no"] = { "<Cmd>ZkOpenNotes<CR>", desc = "Open notes" }
+maps.n["<Leader>nf"] = { "<Cmd>ZkOpenNotes<CR>", desc = "Open notes" }
 maps.n["<Leader>ni"] = { "<cmd>ZkOpenNotebook<CR>", desc = "Open notebook" }
 maps.n["<Leader>n."] = { "<Cmd>ZkCd<CR>", desc = "cdw" }
 maps.n["<Leader>nR"] = { "<Cmd>ZkIndex<CR>", desc = "Reindex" }
-maps.n["<Leader>nc"] = { "<cmd>ZkShowCalendar<cr>", desc = "Calendar" }
-maps.n["<Leader>nnr"] = { "<cmd>ZkFindOrCreateNote { group='reference_notes', dir='references'}<cr>", desc = "Reference note" }
-maps.n["<Leader>nns"] = { "<cmd>ZkFindOrCreateNote { group='permanent_notes', dir='slip-box'}<cr>", desc = "Slip note" }
-maps.n["<Leader>nnd"] = { "<cmd>ZkFindOrCreateNote { group='fleeting_notes', dir='dalily_notes'}<cr>", desc = "Daily note" }
-maps.n["<Leader>nnl"] = { "<cmd>ZkFindOrCreateNote { group='literature_notes', dir='literature_notes'}<cr>", desc = "Literature note" }
-maps.n["<Leader>nnp"] = { "<cmd>ZkFindOrCreateProjectNote<cr>", desc = "Project note" }
-maps.n["<Leader>ntt"] = { "<cmd>lua _TASKS_TOGGLE()<CR>", desc = "Tasks today" }
+maps.n["<Leader>nn"] = { "<Cmd>ZkFindOrCreate<CR>", desc = "Find or create note" }
 
-maps.n["<Leader>nfw"] = { "<Cmd>ZkGrep<CR>", desc = "Grep" }
-maps.n["<Leader>nft"] = { "<Cmd>ZkTags<CR>", desc = "By tags" }
-maps.n["<Leader>nfl"] = { "<Cmd>ZkLinks<CR>", desc = "Links" }
-maps.n["<Leader>nfb"] = { "<Cmd>ZkBacklinks<CR>", desc = "Backlinks" }
-maps.n["<Leader>nfo"] = { "<Cmd>ZkOrphans<CR>", desc = "Orphans" }
+maps.v["<Leader>nn"] = { "<cmd>'<,'>ZkNewFromTitleSelection<cr>", desc = "New Project note" }
 
-maps.n["<Leader>njd"] = { "<cmd>ZkFindOrCreateJournalDailyNote<cr>", desc = "New dalily journal" }
-maps.n["<Leader>njf"] = { "<cmd>ZkNew{group='fer', dir='journal/fer'}<cr>", desc = "New fer session" }
+
+
+-- maps.n["<Leader>nt"] = { desc = "Todo's" }
+-- maps.n["<Leader>ntt"] = { "<cmd>lua _TASKS_TOGGLE()<CR>", desc = "Tasks today" }
+-- maps.n["<Leader>ntt"] = { "<cmd>ToDoTxtTasksToggle<CR>", desc = "Todos toggle" }
+-- maps.n["<Leader>ntc"] = { "<cmd>ToDoTxtCapture<CR>", desc = "Todos capture" }
+
+-- maps.n["<Leader>nf"] = { desc = "Find notes" }
+maps.n["<Leader>nw"] = { "<Cmd>ZkGrep<CR>", desc = "Grep" }
+maps.n["<Leader>nt"] = { "<Cmd>ZkTags<CR>", desc = "By tags" }
+maps.n["<Leader>nl"] = { "<Cmd>ZkLinks<CR>", desc = "Links" }
+maps.n["<Leader>nb"] = { "<Cmd>ZkBacklinks<CR>", desc = "Backlinks" }
+maps.n["<Leader>no"] = { "<Cmd>ZkOrphans<CR>", desc = "Orphans" }
+
+-- maps.n["<Leader>nj"] = { desc = "New dalily journal" }
+-- maps.n["<Leader>njd"] = { "<cmd>ZkFindOrCreateJournalDailyNote<cr>", desc = "New dalily journal" }
+-- maps.n["<Leader>njf"] = { "<cmd>ZkNew{group='fer', dir='journal/fer'}<cr>", desc = "New fer session" }
+
 maps.n["<Leader>ns"] = { "<cmd>lua _SCRATCHPAD_TOGGLE()<cr>", desc = "Scratch Pad" }
 
 -- +Toggle
