@@ -367,15 +367,11 @@ function M.find_or_create_note_without_picker(opts)
   assert(opts.dir ~= nil, "Missing dir")
   assert(opts.group ~= nil, "Missing group")
 
-  local picker = require "user.core.plugins.window_picker"
-  local picked_window_id = picker.pick()
-  if picked_window_id then vim.api.nvim_set_current_win(picked_window_id) end
-
   zk.new {
     title = opts.title,
     group = opts.group,
     dir = opts.dir,
-    date = opts.date,
+    -- date = opts.date,
   }
 end
 
