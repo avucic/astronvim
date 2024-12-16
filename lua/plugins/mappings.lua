@@ -157,9 +157,9 @@ maps.n["<Leader>nf"] = { "<Cmd>ZkOpenNotes<CR>", desc = "Open notes" }
 maps.n["<Leader>ni"] = { "<cmd>ZkOpenNotebook<CR>", desc = "Open notebook" }
 maps.n["<Leader>n."] = { "<Cmd>ZkCd<CR>", desc = "cdw" }
 maps.n["<Leader>nR"] = { "<Cmd>ZkIndex<CR>", desc = "Reindex" }
-maps.n["<Leader>nn"] = { "<Cmd>ZkFindOrCreate<CR>", desc = "Find or create note" }
+maps.n["<Leader>nn"] = { "<Cmd>ZkFindOrCreateNote<CR>", desc = "Find or create note" }
 
-maps.v["<Leader>nn"] = { "<cmd>'<,'>ZkNewFromTitleSelection<cr>", desc = "New Project note" }
+maps.v["<Leader>nn"] = { ":'<,'>ZkFindOrCreateNoteFromVisualSelection<cr>", desc = "New Project note", silent = true }
 
 
 

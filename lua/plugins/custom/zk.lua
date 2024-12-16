@@ -6,6 +6,11 @@ local function create_commands()
   vim.api.nvim_create_user_command("ZkOpenNotebook", M.open_notebook, { desc = "Open notebook" })
   vim.api.nvim_create_user_command("ZkGrep", M.grep_notes, { desc = "Search for notes" })
   vim.api.nvim_create_user_command("ZkFindOrCreateNote", M.find_or_create_note, { desc = "Find or create note" })
+  vim.api.nvim_create_user_command(
+    "ZkFindOrCreateNoteFromVisualSelection",
+    M.find_or_create_note_from_selection,
+    { desc = "Find or create note", range = true, nargs = "?", force = true, complete = "lua" }
+  )
   vim.api.nvim_create_user_command("ZkFindOrCreateJournalDailyNote", function()
     local opts = {}
     opts.date = os.date "%d-%m-%Y"
@@ -21,6 +26,7 @@ function M.grep_notes() require("plugins.custom.zk.note").grep_notes { dir = vim
 function M.open_notebook() require("plugins.custom.zk.note").open_notebook() end
 
 function M.find_or_create_note(opts) require("plugins.custom.zk.note").pick_zk_group(opts) end
+function M.find_or_create_note_from_selection(opts) require("plugins.custom.zk.note").pick_zk_group(opts) end
 
 function M.find_or_create_note_without_picker(opts)
   require("plugins.custom.zk.note").find_or_create_note_without_picker(opts)

@@ -6,6 +6,7 @@ local state = require "telescope.actions.state"
 local finders = require "telescope.finders"
 local sorters = require "telescope.sorters"
 local zk = require "zk"
+local util = require "zk.util"
 
 local entry_display = require "telescope.pickers.entry_display"
 
@@ -254,14 +255,13 @@ function M.pick_zk_group(opts)
         actions.select_default:replace(function()
           actions.close(prompt_bufnr)
           local selection = state.get_selected_entry()
-          local group = selection[1]
-          if group == "" then group = nil end
-          local dir = nil
-
-          print(vim.inspect(groups))
-
-          if group then
-            if groups[group] and groups[group]["paths"] then dir = groups[group]["paths"][1] end
+          local group, dir
+          if selection then
+            group = selection[1]
+            if group == "" then group = nil end
+            if group then
+              if groups[group] and groups[group]["paths"] then dir = groups[group]["paths"][1] end
+            end
           end
 
           M.find_or_create_note { group = group, dir = dir }
@@ -277,6 +277,30 @@ function M.find_or_create_note(opts)
   opts = opts or {}
   local group = opts.group
   local dir = opts.dir or get_zk_notebook_dir()
+  local location = util.get_lsp_location_from_selection()
+  local selected_text = util.get_selected_text()
+
+  if selected_text ~= "" then
+    if string.match(selected_text, "(.-)\n") then
+      opts.content = selected_text
+    else
+      opts.title = selected_text
+    end
+
+    if opts.inline == true then
+      opts.inline = nil
+      opts.dryRun = true
+      opts.insertContentAtLocation = location
+    else
+      opts.insertLinkAtLocation = location
+    end
+
+    zk.new(opts)
+
+    return
+  end
+
+  -- local mode = vim.fn.mode()
 
   local cwd = get_zk_notebook_dir()
   local options = vim.tbl_deep_extend("force", {

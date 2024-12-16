@@ -179,7 +179,7 @@ return {
       "ZkGrep",
       "ZkIndex",
       "ZkNew",
-      "ZkNewFromTitleSelection",
+      -- "ZkNewFromTitleSelection",
       "ZkNewFromContentSelection",
       "ZkCd",
       "ZkNotes",
