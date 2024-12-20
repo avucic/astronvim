@@ -64,4 +64,12 @@ return {
     cmd = { "OilBookmarks" },
     config = function() require("plugins.custom.oil_explorer_bookmarks").setup() end,
   },
+
+  {
+    "avucic/paste-markdown-url",
+    build = "pip3 install requests beautifulsoup4 lxml",
+    config = function() require "paste-markdown-url" end,
+    ft = "markdown",
+    cmd = { "PasteMDLink" },
+  },
 }

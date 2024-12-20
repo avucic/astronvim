@@ -1,4 +1,32 @@
 return {
+  {
+    "github/copilot.vim",
+    cmd = { "Copilot" },
+    config = function()
+      require("copilot").setup {
+        panel = {
+          auto_refresh = false,
+          keymap = {
+            accept = "<CR>",
+            jump_prev = "<c-p>",
+            jump_next = "<c-n>",
+            refresh = "gr",
+            open = "<M-CR>",
+          },
+        },
+        suggestion = {
+          enabled = true,
+          -- auto_trigger = true,
+          keymap = {
+            accept = "<cr>",
+            prev = "<c-p>",
+            next = "<c-n>",
+            dismiss = "<esc>",
+          },
+        },
+      }
+    end,
+  },
   -- {
   --   "David-Kunz/gen.nvim",
   --   cmd = "Gen",
