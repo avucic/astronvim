@@ -25,6 +25,7 @@ return {
     init = function()
       vim.cmd [[
         let g:VM_mouse_mappings = 1
+        let g:VM_leader = ','
         " let g:VM_maps = {}
         " let g:VM_maps["Add Cursor At Pos"]            = '<c-c>'
         " let g:VM_maps['Visual Add']                   = '<c-c>'

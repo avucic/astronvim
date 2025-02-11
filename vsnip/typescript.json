@@ -1,11 +1,12 @@
 {
   "React component": {
-    "scope": "typescript,typescriptreact,javascript",
+    "scope": "typescript",
     "prefix": "eaf",
-    "body": [
-      "export const ${1:${TM_FILENAME_BASE}} = ()=>{",
-      "",
-      "}"
-    ]
+    "body": ["export const ${1:${TM_FILENAME_BASE}} = ()=>{", "", "}"]
+  },
+  "Arrow function": {
+    "scope": "typescript",
+    "prefix": "af",
+    "body": ["($1)=>{$2}"]
   }
 }

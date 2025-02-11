@@ -1,4 +1,3 @@
-local dap = require "dap"
 local js_based_languages = { "typescript", "javascript", "typescriptreact" }
 
 return {

@@ -15,9 +15,11 @@ return {
       },
     },
     config = function()
+      -- local workspaces = require("plugins.custom.workspaces").
       require("workspace").setup {
         workspaces = {
           { name = "NLP", path = "~/Documents/NLP" },
+          { name = "CV", path = "~/Documents/CV/jsonresume/" },
           { name = "PRICING_WALL-RUBY", path = "~/Work/pricingwall.com/dev/pricing_wall-ruby" },
           { name = "PRICING_WALL", path = "~/Work/pricingwall.com/dev/pricing_wall" },
           { name = "PRICING_WALL-WEB", path = "~/Work/pricingwall.com/dev/pricing_wall/web" },

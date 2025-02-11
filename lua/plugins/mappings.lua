@@ -103,22 +103,12 @@ maps.n["<leader>bd"] = {
     )
 end, desc = "Pick from tabline and close" }
 maps.n["<leader>bQ"] = { "<cmd>q<cr>", desc = "Force close", }
-maps.n["<leader>bD"] = { function ()
-  local bufinfos = vim.fn.getbufinfo { buflisted = true }
-  vim.tbl_map(function(bufinfo)
-    if bufinfo.changed == 0 and (not bufinfo.windows or #bufinfo.windows == 0) then
-      print(("Deleting buffer %d : %s"):format(bufinfo.bufnr, bufinfo.name))
-      vim.api.nvim_buf_delete(bufinfo.bufnr, { force = false, unload = false })
-    end
-  end, bufinfos)
-end, desc = "Wipeout all buffers not shown in a window", }
+maps.n["<leader>bD"] = { "<cmd>WipeWindowlessBufs<cr>", desc = "Wipeout all buffers not shown in a window", }
 
 -- +Git
-maps.n["<Leader>gf"] = { "<cmd>Easypick changed_files<cr>", desc = "List changed files" }
-maps.n["<Leader>gr"] = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", desc = "Reset hunk" }
-maps.n["<Leader>gR"] = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", desc = "Reset buffer" }
--- maps.n["<Leader>gO"] = { "<cmd>OpenInGHFile<cr>", desc = "Open current file in Github" }
--- maps.n["<Leader>go"] = { "<cmd>OpenInGHRepo<cr>", desc = "Open page with line in Github" }
+-- maps.n["<Leader>gf"] = { "<cmd>Easypick changed_files<cr>", desc = "List changed files" }
+-- maps.n["<Leader>gr"] = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", desc = "Reset hunk" }
+-- maps.n["<Leader>gR"] = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", desc = "Reset buffer" }
 maps.n["<Leader>gg"] = {
   "<cmd>lua _LAZYGIT_TOGGLE()<CR>",
   desc = "Git status",
@@ -188,7 +178,7 @@ maps.n["<Leader>no"] = { "<Cmd>ZkOrphans<CR>", desc = "Orphans" }
 -- maps.n["<Leader>njd"] = { "<cmd>ZkFindOrCreateJournalDailyNote<cr>", desc = "New dalily journal" }
 -- maps.n["<Leader>njf"] = { "<cmd>ZkNew{group='fer', dir='journal/fer'}<cr>", desc = "New fer session" }
 
-maps.n["<Leader>ns"] = { "<cmd>lua _SCRATCHPAD_TOGGLE()<cr>", desc = "Scratch Pad" }
+-- maps.n["<Leader>ns"] = { "<cmd>lua _SCRATCHPAD_TOGGLE()<cr>", desc = "Scratch Pad" }
 
 -- +Toggle
 -- maps.n["<Leader>ub"] = { "<cmd>lua require('user.core.utils').toggle_theme()<cr>", desc = "Toggle theme" }

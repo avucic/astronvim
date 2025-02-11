@@ -115,6 +115,18 @@ return {
           target = "%1.tsx",
           context = "file",
         },
+
+        {
+          pattern = "(.*).tsx",
+          target = "%1.stories.tsx",
+          context = "spec",
+        },
+
+        {
+          pattern = "(.*).stories.tsx",
+          target = "%1.tsx",
+          context = "file",
+        },
       },
     },
   },

@@ -68,6 +68,10 @@ return {
             function() require("global-note").toggle_note() end,
             desc = "Toggle global note",
           }
+          maps.n["<Leader>ns"] = {
+            function() require("global-note").toggle_note() end,
+            desc = "Toggle global note",
+          }
           maps.n[prefix .. "l"] = {
             function() require("global-note").toggle_note "project_local" end,
             desc = "Toggle local note",
@@ -189,6 +193,7 @@ return {
       "ZkInsertLink",
       "ZkMatch",
       "ZkTags",
+      "ZkOpenNotebook",
       "ZkFindOrCreate",
       "ZkFindOrCreateJournalDailyNote",
       "ZkOpenNotes",

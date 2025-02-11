@@ -1,110 +1,192 @@
 return {
   {
-    "github/copilot.vim",
-    cmd = { "Copilot" },
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      {
+        "AstroNvim/astrocore",
+        opts = function(_, opts)
+          local maps = opts.mappings
+          maps.n["<leader>:"] = { desc = "AI" }
+          maps.n["<leader>:l"] = {
+            function() require("codecompanion").prompt "lsp" end,
+            desc = "Explain the LSP diagnostics for the selected code",
+          }
+
+          maps.n["<leader>:o"] = {
+            "<Cmd>CodeCompanionChat<cr>",
+            desc = "Olamma",
+          }
+
+          maps.n["<leader>:c"] = {
+            "<cmd>CodeCompanion<cr>",
+            desc = "Copilot",
+          }
+
+          maps.n["<leader>::"] = {
+            "<cmd>CodeCompanion chat<cr>",
+            desc = "Chat",
+          }
+
+          maps.v["<leader>:"] = { "AI" }
+          maps.v["<leader>:e"] = {
+            function() require("codecompanion").prompt "explain" end,
+            desc = "Code explanation",
+          }
+          maps.v["<leader>:b"] = {
+            function() require("codecompanion").prompt "buffer" end,
+            desc = "Send the current buffer to the LLM alongside a prompt",
+          }
+          maps.v["<leader>:c"] = {
+            function() require("codecompanion").prompt "commit" end,
+            desc = "Generate a commit message",
+          }
+          maps.v["<leader>:f"] = {
+            function() require("codecompanion").prompt "fix" end,
+            desc = "Fix the selected code",
+          }
+          maps.v["<leader>:t"] = {
+            function() require("codecompanion").prompt "lsp" end,
+            desc = "Generate unit tests for selected code",
+          }
+        end,
+      },
+    },
+    cmd = { "CodeCompanionChat", "CodeCompanionCmd", "CodeCompanion" },
     config = function()
-      require("copilot").setup {
-        panel = {
-          auto_refresh = false,
-          keymap = {
-            accept = "<CR>",
-            jump_prev = "<c-p>",
-            jump_next = "<c-n>",
-            refresh = "gr",
-            open = "<M-CR>",
+      require("codecompanion").setup {
+        strategies = {
+          chat = {
+            adapter = "ollama",
+          },
+          inline = {
+            adapter = "copilot",
           },
         },
-        suggestion = {
-          enabled = true,
-          -- auto_trigger = true,
-          keymap = {
-            accept = "<cr>",
-            prev = "<c-p>",
-            next = "<c-n>",
-            dismiss = "<esc>",
-          },
-        },
+        --
+        -- adapters = {
+        --   deepseek = function()
+        --     return require("codecompanion.adapters").extend("openai_compatible", {
+        --       env = {
+        --         url = "https://api.deepseek.com",
+        --         api_key = vim.env.DEEPSEEK_API_KEY,
+        --       },
+        --     })
+        --   end,
+        -- },
+        -- strategies = {
+        --   chat = { adapter = "deepseek" },
+        --   inline = { adapter = "deepseek" },
+        --   agent = { adapter = "deepseek" },
+        -- },
+        --
+        --
+        --
+        -- adapters = {
+        --   -- ollama = function()
+        --   --   return require("codecompanion.adapters").extend("openai_compatible", {
+        --   --     env = {
+        --   --       -- url = "http[s]://open_compatible_ai_url", -- optional: default value is ollama url http://127.0.0.1:11434
+        --   --       api_key = "OPENAI_API_KEY", -- optional: if your endpoint is authenticated
+        --   --       chat_url = "/v1/chat/completions", -- optional: default value, override if different
+        --   --     },
+        --   --   })
+        --   -- end,
+        --
+        --   copilot = function()
+        --     return require("codecompanion.adapters").extend("copilot", {
+        --       -- env = {
+        --       --   -- url = "http[s]://open_compatible_ai_url", -- optional: default value is ollama url http://127.0.0.1:11434
+        --       --   api_key = "OPENAI_API_KEY", -- optional: if your endpoint is authenticated
+        --       --   chat_url = "/v1/chat/completions", -- optional: default value, override if different
+        --       -- },
+        --     })
+        --   end,
+        -- },
       }
     end,
   },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function() require("copilot").setup {} end,
+  },
   -- {
-  --   "David-Kunz/gen.nvim",
-  --   cmd = "Gen",
-  --   lazy = true,
-  --   dependencies = {
-  --     {
-  --       "AstroNvim/astrocore",
-  --       opts = function(_, opts)
-  --         local maps = opts.mappings
-  --         maps.n["<Leader>og"] = { ":Gen<CR>", desc = "Ollama" }
-  --         maps.n["<Leader>oG"] = { "<cmd>lua require('gen').select_model()<cr>", desc = "Change Ollama model" }
-  --       end,
-  --     },
-  --   },
-  --   opts = function(_, opts)
-  --     opts.model = "mistral" -- The default model to use.
-  --     opts.display_mode = "float" -- The display mode. Can be "float" or "split".
-  --     opts.show_prompt = true -- Shows the Prompt submitted to Ollama.
-  --     opts.show_model = true -- Displays which model you are using at the beginning of your chat session.
-  --     opts.no_auto_close = false -- Never closes the window automatically.
-  --
-  --     opts.init = function(options) pcall(io.popen "ollama serve > /dev/null 2>&1 &") end
-  --     -- Function to initialize Ollama
-  --     opts.command = "curl --silent --no-buffer -X POST http://localhost:11434/api/generate -d $body"
-  --     -- The command for the Ollama service. You can use placeholders $prompt, $model and $body (shellescaped).
-  --     -- This can also be a lua function returning a command string, with options as the input parameter.
-  --     -- The executed command must return a JSON object with { response, context }
-  --     -- (context property is optional).
-  --     -- list_models = "<omitted lua function>", -- Retrieves a list of model names
-  --     opts.debug = false -- Prints errors and the command which is run.
-  --   end,
-  -- },
-  -- {
-  --   "yetone/avante.nvim",
-  --   event = "VeryLazy",
-  --   lazy = true,
-  --   version = false, -- set this if you want to always pull the latest change
+  --   "github/copilot.vim",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
   --   opts = {
-  --     provider = "openai",
+  --     panel = {
+  --       enabled = true,
+  --       auto_refresh = false,
+  --       keymap = {
+  --         jump_prev = "[[",
+  --         jump_next = "]]",
+  --         accept = "<CR>",
+  --         refresh = "gr",
+  --         open = "<M-CR>",
+  --       },
+  --       layout = {
+  --         position = "bottom", -- | top | left | right | horizontal | vertical
+  --         ratio = 0.4,
+  --       },
+  --     },
+  --     suggestion = {
+  --       enabled = true,
+  --       auto_trigger = false,
+  --       hide_during_completion = true,
+  --       debounce = 75,
+  --       keymap = {
+  --         accept = "<M-l>",
+  --         accept_word = false,
+  --         accept_line = false,
+  --         next = "<M-]>",
+  --         prev = "<M-[>",
+  --         dismiss = "<C-]>",
+  --       },
+  --     },
+  --     filetypes = {
+  --       yaml = false,
+  --       markdown = true,
+  --       help = false,
+  --       gitcommit = false,
+  --       gitrebase = false,
+  --       hgcommit = false,
+  --       svn = false,
+  --       cvs = false,
+  --       ["."] = false,
+  --     },
+  --     copilot_node_command = "node", -- Node.js version must be > 18.x
+  --     server_opts_overrides = {},
+  --   },
+  --   -- config = function(_, opts)
+  --   local cmp = require "cmp"
+  --   local copilot = require "copilot"
+  --   local luasnip = require "luasnip"
   --
-  --     -- add any opts here
-  --   },
-  --   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-  --   build = "make",
-  --   -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-  --   dependencies = {
-  --     "nvim-treesitter/nvim-treesitter",
-  --     "stevearc/dressing.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --     "MunifTanjim/nui.nvim",
-  --     --- The below dependencies are optional,
-  --     "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-  --     "zbirenbaum/copilot.lua", -- for providers='copilot'
-  --     {
-  --       -- support for image pasting
-  --       "HakonHarnes/img-clip.nvim",
-  --       event = "VeryLazy",
-  --       opts = {
-  --         -- recommended settings
-  --         default = {
-  --           embed_image_as_base64 = false,
-  --           prompt_for_file_name = false,
-  --           drag_and_drop = {
-  --             insert_mode = true,
-  --           },
-  --           -- required for Windows users
-  --           use_absolute_path = true,
-  --         },
-  --       },
-  --     },
-  --     {
-  --       -- Make sure to set this up properly if you have lazy=true
-  --       "MeanderingProgrammer/render-markdown.nvim",
-  --       opts = {
-  --         file_types = { "markdown", "Avante" },
-  --       },
-  --       ft = { "markdown", "Avante" },
-  --     },
-  --   },
+  --   copilot.setup(opts)
+  --
+  --
+  --   local function set_trigger(trigger)
+  --     vim.b.copilot_suggestion_auto_trigger = trigger
+  --     vim.b.copilot_suggestion_hidden = not trigger
+  --   end
+  --
+  --   -- Hide suggestions when the completion menu is open.
+  --   cmp.event:on("menu_opened", function()
+  --     if copilot.is_visible() then copilot.dismiss() end
+  --     set_trigger(false)
+  --   end)
+  --
+  --   -- Disable suggestions when inside a snippet.
+  --   cmp.event:on("menu_closed", function() set_trigger(not luasnip.expand_or_locally_jumpable()) end)
+  --
+  --   vim.api.nvim_create_autocmd("User", {
+  --     pattern = { "LuasnipInsertNodeEnter", "LuasnipInsertNodeLeave" },
+  --     callback = function() set_trigger(not luasnip.expand_or_locally_jumpable()) end,
+  --   })
+  -- end,
   -- },
 }
