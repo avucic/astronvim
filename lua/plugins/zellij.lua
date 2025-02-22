@@ -1,7 +1,12 @@
--- vim.api.nvim_create_autocmd("VimLeave", {
---   pattern = "*",
---   command = "silent !zellij action switch-mode normal",
--- })
+vim.api.nvim_create_autocmd("VimLeave", {
+  pattern = "*",
+  command = "silent !zellij action switch-mode normal",
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*",
+  command = "silent !zellij action switch-mode locked",
+})
 --
 return {
   {
@@ -17,3 +22,9 @@ return {
     opts = {},
   },
 }
+-- return {
+--   {
+--     "hiasr/vim-zellij-navigator.nvim",
+--     config = function() require("vim-zellij-navigator").setup() end,
+--   },
+-- }
