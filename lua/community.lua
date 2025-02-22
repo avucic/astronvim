@@ -159,14 +159,14 @@ return {
       }
 
       opts.float = {
-        padding = 20,
-        max_width = 0,
-        max_height = 0,
-        border = "rounded",
-        win_options = {
-          winblend = 0,
-          winhighlight = "NormalFloat:Telescope",
-        },
+        -- padding = 20,
+        -- max_width = 0,
+        -- max_height = 0,
+        -- border = "rounded",
+        -- win_options = {
+        --   winblend = 0,
+        --   winhighlight = "NormalFloat:Telescope",
+        -- },
         -- optionally override the oil buffers window title with custom function: fun(winid: integer): string
         -- preview_split: Split direction: "auto", "left", "right", "above", "below".
         preview_split = "auto",
