@@ -73,7 +73,8 @@ return {
       }
       require("codecompanion").setup {
         strategies = {
-          chat = adapter,
+          -- chat = adapter,
+          chat = { adapter = "copilot" },
           inline = { adapter = "copilot" },
           agent = { adapter = "copilot" },
         },
@@ -141,15 +142,15 @@ return {
           --   })
           -- end,
 
-          -- copilot = function()
-          --   return require("codecompanion.adapters").extend("copilot", {
-          --     -- env = {
-          --     --   -- url = "http[s]://open_compatible_ai_url", -- optional: default value is ollama url http://127.0.0.1:11434
-          --     --   api_key = "OPENAI_API_KEY", -- optional: if your endpoint is authenticated
-          --     --   chat_url = "/v1/chat/completions", -- optional: default value, override if different
-          --     -- },
-          --   })
-          -- end,
+          gemini = function()
+            return require("codecompanion.adapters").extend("gemini", {
+              env = {
+                --   -- url = "http[s]://open_compatible_ai_url", -- optional: default value is ollama url http://127.0.0.1:11434
+                api_key = os.getenv "GEMINI_API_KEY", -- optional: if your endpoint is authenticated
+                --   chat_url = "/v1/chat/completions", -- optional: default value, override if different
+              },
+            })
+          end,
         },
       }
     end,
