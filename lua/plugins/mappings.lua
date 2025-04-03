@@ -65,7 +65,7 @@ maps.n["<Leader>fy"] = { "<cmd>let @*=expand('%')<cr>", desc = "Yank file path" 
 maps.n["<Leader>fY"] = { "<cmd>let @*=expand('%:p')<cr>", desc = "Yank full file path" }
 maps.n["<Leader>fx"] = { "<cmd>OpenFile<cr>", desc = "Open file in folder" }
 maps.n["<Leader>fX"] = { "<cmd>OpenFolderInFinder<cr>", desc = "Open folder" }
-maps.n["<leader>fw"] = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", desc = "Live grep", }
+maps.n["<leader>fw"] = { ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", desc = "Live grep", }
 maps.v["<leader>fw"] = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args({default_text = require('core.utils').get_visual_selection()})<CR>", desc = "Live grep", }
 maps.n["<leader>fR"] = { "<cmd>e %<CR>", desc = "Reload file", }
 maps.n["<Leader>fC"] = false
@@ -133,7 +133,7 @@ maps.n["<Leader>t"] = { desc = "Tasks" }
 maps.n["<Leader>tf"] = false
 maps.n["<Leader>th"] = false
 maps.n["<Leader>tl"] = false
-maps.n["<Leader>tn"] = false
+-- maps.n["<Leader>tn"] = false
 maps.n["<Leader>tp"] = false
 maps.n["<Leader>tv"] = false
 
