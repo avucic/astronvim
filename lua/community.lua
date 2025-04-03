@@ -47,8 +47,40 @@ return {
   { import = "astrocommunity.utility.noice-nvim" },
   { import = "astrocommunity.utility.nvim-toggler" },
   { import = "astrocommunity.utility.telescope-live-grep-args-nvim" },
+  { import = "astrocommunity.debugging.telescope-dap-nvim" },
 
   { import = "astrocommunity.note-taking.global-note-nvim" },
+
+  {
+    "backdround/global-note.nvim",
+    dependencies = {
+      {
+        "AstroNvim/astrocore",
+        opts = function(_, opts)
+          local maps = opts.mappings
+          local prefix = "<Leader>nt"
+
+          maps.n["<Leader>m"] = false
+          maps.n["<Leader>m" .. "m"] = false
+          maps.n["<Leader>m" .. "l"] = false
+
+          maps.n[prefix] = { desc = require("astroui").get_icon("Notes", 1, true) .. "Notes" }
+          maps.n[prefix .. "m"] = {
+            function() require("global-note").toggle_note() end,
+            desc = "Toggle global note",
+          }
+          maps.n["<Leader>ns"] = {
+            function() require("global-note").toggle_note() end,
+            desc = "Toggle global note",
+          }
+          maps.n[prefix .. "l"] = {
+            function() require("global-note").toggle_note "project_local" end,
+            desc = "Toggle local note",
+          }
+        end,
+      },
+    },
+  },
 
   {
     "backdround/global-note.nvim",
