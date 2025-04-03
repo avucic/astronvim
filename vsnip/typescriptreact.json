@@ -28,15 +28,11 @@
   "useEffect": {
     "scope": "typescript,typescriptreact",
     "prefix": "useE",
-    "body": [
-      "useEffect(() => {",
-      "\t${1}",
-      "}, [${2}]);"
-    ]
+    "body": ["useEffect(() => {", "\t${1}", "}, [${2}]);"]
   },
   "React component": {
     "scope": "typescript,typescriptreact",
-    "prefix": "rc",
+    "prefix": "rfc",
     "body": [
       "import React from 'react'",
       "",
@@ -54,15 +50,11 @@
   "Arrow function": {
     "scope": "typescript,typescriptreact",
     "prefix": "af",
-    "body": [
-      "($1)=>{$2}"
-    ]
+    "body": ["($1)=>{$2}"]
   },
   "Async Arrow function": {
     "scope": "typescript,typescriptreact",
     "prefix": "aaf",
-    "body": [
-      "async ($1)=>{$2}"
-    ]
+    "body": ["async ($1)=>{$2}"]
   }
 }
